@@ -333,6 +333,21 @@ h1 {
   padding: 24px;
 }
 
+.theme-grid .foundation-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  border-color: rgba(23, 33, 27, 0.28);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.theme-grid .foundation-card p {
+  color: #dce3db;
+}
+
 .index {
   display: block;
   margin-bottom: 24px;
@@ -473,6 +488,10 @@ h1 {
   .hero,
   .theme-grid,
   .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-grid .foundation-card {
     grid-template-columns: 1fr;
   }
 
