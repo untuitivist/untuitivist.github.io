@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Intelligence from Within: AI systems built from internal representations, constraints, and feedback."
+    />
+    <title>Intelligence from Within</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="Intelligence from Within home">
+        <span class="brand-mark" aria-hidden="true">IfW</span>
+        <span>Intelligence from Within</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#theme">Theme</a>
+        <a href="#work">Work</a>
+        <a href="#tools">Tools</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Research systems, embodied AI, and agent-native tooling</p>
+          <h1>Intelligence from Within</h1>
+          <p class="lead">
+            AI systems built from the internal representations, constraints, and feedback loops
+            of real-world signals, embodied systems, and research workflows.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#work">View selected work</a>
+            <a class="button secondary" href="https://github.com/untuitivist">GitHub</a>
+          </div>
+        </div>
+
+        <figure class="system-map" aria-label="A visual map of the Intelligence from Within research loop">
+          <div class="map-node real">
+            <span>Real</span>
+            <strong>Signals</strong>
+          </div>
+          <div class="map-node latent">
+            <span>Latent</span>
+            <strong>Models</strong>
+          </div>
+          <div class="map-node action">
+            <span>Real</span>
+            <strong>Action</strong>
+          </div>
+          <div class="map-core">
+            <span>representations</span>
+            <span>constraints</span>
+            <span>feedback</span>
+          </div>
+        </figure>
+      </section>
+
+      <section id="theme" class="section theme-section">
+        <div class="section-heading">
+          <p class="eyebrow">Core theme</p>
+          <h2>From real systems to inspectable intelligence loops.</h2>
+        </div>
+        <div class="theme-grid">
+          <article>
+            <span class="index">01</span>
+            <h3>Industrial Signals</h3>
+            <p>
+              Cross-machine fault diagnosis and sample generation for sparse, shifted, and
+              physically grounded one-dimensional sensor data.
+            </p>
+          </article>
+          <article>
+            <span class="index">02</span>
+            <h3>Embodied Systems</h3>
+            <p>
+              Body, hand, and robot-state pipelines that connect perception, simulation,
+              safety analysis, and deployable world representations.
+            </p>
+          </article>
+          <article>
+            <span class="index">03</span>
+            <h3>Research Automation</h3>
+            <p>
+              Agent-native tools that turn literature search, alpha mining, experiments,
+              and asynchronous workflows into inspectable command surfaces.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="work" class="section work-section">
+        <div class="section-heading compact">
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects to surface first.</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card feature">
+            <div class="card-meta">
+              <span>Research Highlight</span>
+              <span>Fault diagnosis</span>
+            </div>
+            <h3>PCASTNet / Physics-Constrained Style Transfer</h3>
+            <p>
+              A cross-device, small-sample fault diagnosis direction centered on style transfer,
+              generation, and physically constrained representation learning for bearing signals.
+            </p>
+            <ul>
+              <li>Real signal domains with limited target-machine samples.</li>
+              <li>Latent or generated domains for augmentation and adaptation.</li>
+              <li>Back-to-real evaluation through diagnosis accuracy and transfer robustness.</li>
+            </ul>
+            <a href="files/TIM-25-10793R1.pdf">Open manuscript PDF</a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Embodied AI</span>
+              <span>Robotics</span>
+            </div>
+            <h3>eVTOL Safe WM</h3>
+            <p>
+              A safety-oriented world-model prototype around robotics simulation, state feedback,
+              and scenario evaluation in Isaac Sim / Isaac Lab workflows.
+            </p>
+          </article>
+
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Embodied Data</span>
+              <span>Tracking</span>
+            </div>
+            <h3>Ego-body and Hand Tracking Pipelines</h3>
+            <p>
+              Engineering pipelines for body, hand, face-blurring, and multimodal data handling,
+              with emphasis on practical data flow, visualization, and privacy boundaries.
+            </p>
+          </article>
+
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Quant Research</span>
+              <span>Agent prototype</span>
+            </div>
+            <h3>AlphaSpire</h3>
+            <p>
+              An exploratory automated alpha-mining system. Public presentation should focus on
+              workflow design, factor representations, and reproducible evaluation surfaces.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="section tools-section">
+        <div class="section-heading compact">
+          <p class="eyebrow">Research infrastructure</p>
+          <h2>Tools that make the loop repeatable.</h2>
+        </div>
+        <div class="tool-list">
+          <article>
+            <div>
+              <h3>wqb-cli</h3>
+              <p>
+                A command interface for structured WorldQuant BRAIN research workflows, designed
+                for agent usage, JSON output, endpoint inspection, and long-running job handling.
+              </p>
+            </div>
+            <a href="https://github.com/untuitivist/wqb_cli">Repository</a>
+          </article>
+          <article>
+            <div>
+              <h3>arxiv-cli</h3>
+              <p>
+                A focused arXiv retrieval toolkit for reproducible literature search, metadata
+                extraction, and agent-friendly research intake.
+              </p>
+            </div>
+            <a href="https://github.com/untuitivist/arxiv_cli">Repository</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section principles-section">
+        <div class="statement">
+          <p>
+            Intelligence is not added as a black-box layer. It is built by exposing and modeling
+            the internal structure of signals, systems, and workflows.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div>
+        <strong>untuitivist</strong>
+        <span>Research systems, embodied AI, and agent-native automation.</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/untuitivist">GitHub</a>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" type="module"></script>
+  </body>
+</html>
