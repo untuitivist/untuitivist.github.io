@@ -212,23 +212,41 @@ h1 {
   overflow: hidden;
 }
 
-.system-map::before,
-.system-map::after {
-  content: "";
+.truth-ring {
   position: absolute;
-  inset: 72px;
-  border: 1px solid rgba(31, 111, 85, 0.28);
+  border: 1px solid transparent;
   border-radius: 50%;
+  pointer-events: none;
 }
 
-.system-map::after {
-  inset: 122px 84px 96px;
-  border-color: rgba(184, 93, 51, 0.32);
-  transform: rotate(-18deg);
+.micro-ring {
+  left: 58px;
+  top: 82px;
+  width: 68%;
+  height: 54%;
+  border-color: rgba(31, 111, 85, 0.3);
+  transform: rotate(-14deg);
 }
 
-.map-node,
-.map-core {
+.macro-ring {
+  right: 42px;
+  top: 104px;
+  width: 62%;
+  height: 52%;
+  border-color: rgba(44, 93, 135, 0.3);
+  transform: rotate(18deg);
+}
+
+.social-ring {
+  left: 82px;
+  bottom: 86px;
+  width: 60%;
+  height: 44%;
+  border-color: rgba(184, 93, 51, 0.28);
+  transform: rotate(34deg);
+}
+
+.map-node {
   position: absolute;
   z-index: 2;
   border: 1px solid var(--line);
@@ -293,26 +311,6 @@ h1 {
   bottom: 58px;
   left: 84px;
   border-top: 5px solid var(--rust);
-}
-
-.map-core {
-  right: 48px;
-  bottom: 58px;
-  display: grid;
-  gap: 10px;
-  padding: 20px;
-  color: var(--muted);
-  font-weight: 720;
-}
-
-.map-core span::before {
-  content: "";
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  margin-right: 10px;
-  border-radius: 50%;
-  background: var(--gold);
 }
 
 .section {
@@ -565,12 +563,7 @@ h1 {
 
   .map-node.action {
     left: 28px;
-  }
-
-  .map-core {
-    right: 18px;
-    bottom: 26px;
-    max-width: 168px;
+    bottom: 18px;
   }
 
   .tool-list article,
