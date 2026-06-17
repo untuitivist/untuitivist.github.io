@@ -8,6 +8,7 @@ const copy = {
     pageTitle: "WIZ / Within Intelligence Zone",
     metaDescription:
       "WIZ / Within Intelligence Zone: AI systems built from internal representations, constraints, and feedback.",
+    brandMark: "WIZ",
     brand: "Within Intelligence Zone",
     navTheme: "Theme",
     navWork: "Work",
@@ -17,6 +18,8 @@ const copy = {
     heroTitle: "Intelligence from Within",
     heroLead:
       "AI systems built from the internal representations, constraints, and feedback loops of real-world signals, embodied systems, and research workflows.",
+    brandNote:
+      "Concepts need intuition; intuition needs concepts. Knowledge becomes possible when the two are joined.",
     viewWork: "View selected work",
     mapReal1: "Real",
     mapSignals: "Signals",
@@ -70,20 +73,23 @@ const copy = {
     repo: "Repository",
     statement:
       "Intelligence is not added as a black-box layer. It is built by exposing and modeling the internal structure of signals, systems, and workflows.",
+    footerBrand: "WIZ / untuitivist",
     footerText:
       "Within Intelligence Zone for research systems, embodied AI, and agent-native automation.",
   },
   zh: {
-    pageTitle: "WIZ / 内生智能场",
-    metaDescription: "WIZ / Within Intelligence Zone：从真实系统内部的表示、约束与反馈中构建 AI 系统。",
-    brand: "Within Intelligence Zone",
+    pageTitle: "无直观 / Intelligence from Within",
+    metaDescription: "无直观：概念无直观则空，直观无概念则盲。两者结合，知识方得可能。",
+    brandMark: "无",
+    brand: "无直观",
     navTheme: "主线",
     navWork: "成果",
     navTools: "工具",
     navContact: "联系",
-    heroEyebrow: "WIZ / Within Intelligence Zone",
+    heroEyebrow: "无直观 / WIZ",
     heroTitle: "Intelligence from Within",
     heroLead: "从真实信号、具身系统与研究工作流内部的表示、约束和反馈回路中构建 AI 系统。",
+    brandNote: "概念无直观则空，直观无概念则盲；两者结合，知识方得可能。",
     viewWork: "查看代表工作",
     mapReal1: "真实",
     mapSignals: "信号",
@@ -127,7 +133,8 @@ const copy = {
     arxivText: "面向可复现文献检索的 arXiv 工具，支持元数据提取和 agent 友好的研究输入。",
     repo: "仓库",
     statement: "智能不是外加的黑箱层，而是通过揭示并建模信号、系统与工作流内部结构形成的。",
-    footerText: "面向研究系统、具身智能与 agent-native 自动化的 Within Intelligence Zone。",
+    footerBrand: "无直观 / WIZ",
+    footerText: "概念、直观与系统反馈结合处的研究主页。",
   },
 };
 
