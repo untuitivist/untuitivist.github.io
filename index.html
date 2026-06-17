@@ -5,88 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Intelligence from Within: AI systems built from internal representations, constraints, and feedback."
+      content="WIZ / Within Intelligence Zone: AI systems built from internal representations, constraints, and feedback."
     />
-    <title>Intelligence from Within</title>
+    <title>WIZ / Within Intelligence Zone</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/site.css" />
   </head>
   <body>
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="Intelligence from Within home">
-        <span class="brand-mark" aria-hidden="true">IfW</span>
-        <span>Intelligence from Within</span>
-      </a>
+      <div class="brand-cluster">
+        <a class="brand" href="#top" aria-label="WIZ home">
+          <span class="brand-mark" aria-hidden="true">WIZ</span>
+          <span data-i18n="brand">Within Intelligence Zone</span>
+        </a>
+        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+          <span data-lang-current>EN</span>
+          <span aria-hidden="true">/</span>
+          <span data-lang-next>中</span>
+        </button>
+      </div>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#theme">Theme</a>
-        <a href="#work">Work</a>
-        <a href="#tools">Tools</a>
-        <a href="#contact">Contact</a>
+        <a href="#theme" data-i18n="navTheme">Theme</a>
+        <a href="#work" data-i18n="navWork">Work</a>
+        <a href="#tools" data-i18n="navTools">Tools</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Research systems, embodied AI, and agent-native tooling</p>
-          <h1>Intelligence from Within</h1>
-          <p class="lead">
+          <p class="eyebrow" data-i18n="heroEyebrow">WIZ / Within Intelligence Zone</p>
+          <h1 data-i18n="heroTitle">Intelligence from Within</h1>
+          <p class="lead" data-i18n="heroLead">
             AI systems built from the internal representations, constraints, and feedback loops
             of real-world signals, embodied systems, and research workflows.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button primary" href="#work">View selected work</a>
+            <a class="button primary" href="#work" data-i18n="viewWork">View selected work</a>
             <a class="button secondary" href="https://github.com/untuitivist">GitHub</a>
           </div>
         </div>
 
         <figure class="system-map" aria-label="A visual map of the Intelligence from Within research loop">
           <div class="map-node real">
-            <span>Real</span>
-            <strong>Signals</strong>
+            <span data-i18n="mapReal1">Real</span>
+            <strong data-i18n="mapSignals">Signals</strong>
           </div>
           <div class="map-node latent">
-            <span>Latent</span>
-            <strong>Models</strong>
+            <span data-i18n="mapLatent">Latent</span>
+            <strong data-i18n="mapModels">Models</strong>
           </div>
           <div class="map-node action">
-            <span>Real</span>
-            <strong>Action</strong>
+            <span data-i18n="mapReal2">Real</span>
+            <strong data-i18n="mapAction">Action</strong>
           </div>
           <div class="map-core">
-            <span>representations</span>
-            <span>constraints</span>
-            <span>feedback</span>
+            <span data-i18n="mapRepresentations">representations</span>
+            <span data-i18n="mapConstraints">constraints</span>
+            <span data-i18n="mapFeedback">feedback</span>
           </div>
         </figure>
       </section>
 
       <section id="theme" class="section theme-section">
         <div class="section-heading">
-          <p class="eyebrow">Core theme</p>
-          <h2>From real systems to inspectable intelligence loops.</h2>
+          <p class="eyebrow" data-i18n="themeEyebrow">Core theme</p>
+          <h2 data-i18n="themeTitle">From real systems to inspectable intelligence loops.</h2>
         </div>
         <div class="theme-grid">
           <article>
             <span class="index">01</span>
-            <h3>Industrial Signals</h3>
-            <p>
+            <h3 data-i18n="zoneSignalTitle">Signal Zone</h3>
+            <p data-i18n="zoneSignalText">
               Cross-machine fault diagnosis and sample generation for sparse, shifted, and
               physically grounded one-dimensional sensor data.
             </p>
           </article>
           <article>
             <span class="index">02</span>
-            <h3>Embodied Systems</h3>
-            <p>
+            <h3 data-i18n="zoneEmbodiedTitle">Embodied Zone</h3>
+            <p data-i18n="zoneEmbodiedText">
               Body, hand, and robot-state pipelines that connect perception, simulation,
               safety analysis, and deployable world representations.
             </p>
           </article>
           <article>
             <span class="index">03</span>
-            <h3>Research Automation</h3>
-            <p>
+            <h3 data-i18n="zoneWorkflowTitle">Workflow Zone</h3>
+            <p data-i18n="zoneWorkflowText">
               Agent-native tools that turn literature search, alpha mining, experiments,
               and asynchronous workflows into inspectable command surfaces.
             </p>
@@ -96,35 +103,35 @@
 
       <section id="work" class="section work-section">
         <div class="section-heading compact">
-          <p class="eyebrow">Selected work</p>
-          <h2>Projects to surface first.</h2>
+          <p class="eyebrow" data-i18n="workEyebrow">Selected work</p>
+          <h2 data-i18n="workTitle">Projects to surface first.</h2>
         </div>
         <div class="project-grid">
           <article class="project-card feature">
             <div class="card-meta">
-              <span>Research Highlight</span>
-              <span>Fault diagnosis</span>
+              <span data-i18n="pcastMeta1">Research Highlight</span>
+              <span data-i18n="pcastMeta2">Fault diagnosis</span>
             </div>
             <h3>PCASTNet / Physics-Constrained Style Transfer</h3>
-            <p>
+            <p data-i18n="pcastText">
               A cross-device, small-sample fault diagnosis direction centered on style transfer,
               generation, and physically constrained representation learning for bearing signals.
             </p>
             <ul>
-              <li>Real signal domains with limited target-machine samples.</li>
-              <li>Latent or generated domains for augmentation and adaptation.</li>
-              <li>Back-to-real evaluation through diagnosis accuracy and transfer robustness.</li>
+              <li data-i18n="pcastPoint1">Real signal domains with limited target-machine samples.</li>
+              <li data-i18n="pcastPoint2">Latent or generated domains for augmentation and adaptation.</li>
+              <li data-i18n="pcastPoint3">Back-to-real evaluation through diagnosis accuracy and transfer robustness.</li>
             </ul>
-            <a href="files/TIM-25-10793R1.pdf">Open manuscript PDF</a>
+            <a href="files/TIM-25-10793R1.pdf" data-i18n="openPdf">Open manuscript PDF</a>
           </article>
 
           <article class="project-card">
             <div class="card-meta">
-              <span>Embodied AI</span>
-              <span>Robotics</span>
+              <span data-i18n="evtolMeta1">Embodied AI</span>
+              <span data-i18n="evtolMeta2">Robotics</span>
             </div>
             <h3>eVTOL Safe WM</h3>
-            <p>
+            <p data-i18n="evtolText">
               A safety-oriented world-model prototype around robotics simulation, state feedback,
               and scenario evaluation in Isaac Sim / Isaac Lab workflows.
             </p>
@@ -132,11 +139,11 @@
 
           <article class="project-card">
             <div class="card-meta">
-              <span>Embodied Data</span>
-              <span>Tracking</span>
+              <span data-i18n="trackingMeta1">Embodied Data</span>
+              <span data-i18n="trackingMeta2">Tracking</span>
             </div>
-            <h3>Ego-body and Hand Tracking Pipelines</h3>
-            <p>
+            <h3 data-i18n="trackingTitle">Ego-body and Hand Tracking Pipelines</h3>
+            <p data-i18n="trackingText">
               Engineering pipelines for body, hand, face-blurring, and multimodal data handling,
               with emphasis on practical data flow, visualization, and privacy boundaries.
             </p>
@@ -144,11 +151,11 @@
 
           <article class="project-card">
             <div class="card-meta">
-              <span>Quant Research</span>
-              <span>Agent prototype</span>
+              <span data-i18n="alphaMeta1">Quant Research</span>
+              <span data-i18n="alphaMeta2">Agent prototype</span>
             </div>
             <h3>AlphaSpire</h3>
-            <p>
+            <p data-i18n="alphaText">
               An exploratory automated alpha-mining system. Public presentation should focus on
               workflow design, factor representations, and reproducible evaluation surfaces.
             </p>
@@ -158,36 +165,36 @@
 
       <section id="tools" class="section tools-section">
         <div class="section-heading compact">
-          <p class="eyebrow">Research infrastructure</p>
-          <h2>Tools that make the loop repeatable.</h2>
+          <p class="eyebrow" data-i18n="toolsEyebrow">Research infrastructure</p>
+          <h2 data-i18n="toolsTitle">Tools that make the loop repeatable.</h2>
         </div>
         <div class="tool-list">
           <article>
             <div>
               <h3>wqb-cli</h3>
-              <p>
+              <p data-i18n="wqbText">
                 A command interface for structured WorldQuant BRAIN research workflows, designed
                 for agent usage, JSON output, endpoint inspection, and long-running job handling.
               </p>
             </div>
-            <a href="https://github.com/untuitivist/wqb_cli">Repository</a>
+            <a href="https://github.com/untuitivist/wqb_cli" data-i18n="repo">Repository</a>
           </article>
           <article>
             <div>
               <h3>arxiv-cli</h3>
-              <p>
+              <p data-i18n="arxivText">
                 A focused arXiv retrieval toolkit for reproducible literature search, metadata
                 extraction, and agent-friendly research intake.
               </p>
             </div>
-            <a href="https://github.com/untuitivist/arxiv_cli">Repository</a>
+            <a href="https://github.com/untuitivist/arxiv_cli" data-i18n="repo">Repository</a>
           </article>
         </div>
       </section>
 
       <section class="section principles-section">
         <div class="statement">
-          <p>
+          <p data-i18n="statement">
             Intelligence is not added as a black-box layer. It is built by exposing and modeling
             the internal structure of signals, systems, and workflows.
           </p>
@@ -197,8 +204,8 @@
 
     <footer id="contact" class="footer">
       <div>
-        <strong>untuitivist</strong>
-        <span>Research systems, embodied AI, and agent-native automation.</span>
+        <strong>WIZ / untuitivist</strong>
+        <span data-i18n="footerText">Within Intelligence Zone for research systems, embodied AI, and agent-native automation.</span>
       </div>
       <div class="footer-links">
         <a href="https://github.com/untuitivist">GitHub</a>

@@ -52,6 +52,7 @@ a {
   border-color: var(--line);
 }
 
+.brand-cluster,
 .brand,
 .nav,
 .hero-actions,
@@ -60,6 +61,10 @@ a {
 .footer-links {
   display: flex;
   align-items: center;
+}
+
+.brand-cluster {
+  gap: 12px;
 }
 
 .brand {
@@ -77,6 +82,28 @@ a {
   color: var(--paper);
   font-size: 12px;
   letter-spacing: 0;
+}
+
+.lang-toggle {
+  min-width: 58px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 780;
+}
+
+.lang-toggle:hover {
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .nav {
@@ -420,6 +447,11 @@ h1 {
     flex-direction: column;
   }
 
+  .brand-cluster {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .hero,
   .theme-grid,
   .project-grid {
@@ -459,6 +491,7 @@ h1 {
 
   .map-node.latent {
     right: 18px;
+    top: 142px;
   }
 
   .map-node.action {
@@ -467,7 +500,7 @@ h1 {
 
   .map-core {
     right: 18px;
-    bottom: 34px;
+    bottom: 26px;
     max-width: 168px;
   }
 
