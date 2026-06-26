@@ -7,7 +7,7 @@ const copy = {
   en: {
     pageTitle: "WIZ / Within Intelligence Zone",
     metaDescription:
-      "WIZ / Within Intelligence Zone: Micro Truth, Macro Truth, and Social Truth, grounded by Agentic Workflow.",
+      "WIZ / Within Intelligence Zone: Micro Truth, Macro Truth, and Social Truth, grounded by Agent-native Workflow.",
     brandMark: "WIZ",
     brand: "Wuzhiguan / untuitivist",
     navTheme: "Theme",
@@ -27,9 +27,12 @@ const copy = {
     mapSocialScope: "collective decision",
     mapSocial: "Social",
     mapSocialIntro: "Truth inside markets, incentives, and collective decisions.",
+    mapAgentScope: "agent-native workflow",
+    mapAgent: "Agent",
+    mapAgentIntro: "The executable actor that searches, runs, inspects, and iterates the three truth loops.",
     themeEyebrow: "Core theme",
     themeTitle:
-      "Built on agentic workflow, intelligence is generated from within real systems: finding Micro Truth in physical signals, modeling Macro Truth in embodied environments, and discovering Social Truth in collective decision systems.",
+      "Built on agent-native workflow, intelligence is generated from within real systems: finding Micro Truth in physical signals, modeling Macro Truth in embodied environments, and discovering Social Truth in collective decision systems.",
     zoneSignalTitle: "Micro",
     zoneSignalText:
       "Micro Truth focuses on local physical signals: the hidden structures inside sensors, machines, and small-scale physical processes.",
@@ -39,7 +42,7 @@ const copy = {
     zoneWorkflowTitle: "Social",
     zoneWorkflowText:
       "Social Truth focuses on collective decision systems: markets, incentives, signals, and factor structures emerging from human and institutional behavior.",
-    foundationTitle: "Agentic Workflow",
+    foundationTitle: "Agent-native Workflow",
     foundationText:
       "The operating layer beneath all three truth domains: tools, APIs, scripts, and interfaces that let agents search, run, inspect, and iterate research workflows.",
     workEyebrow: "Selected work",
@@ -66,7 +69,7 @@ const copy = {
     alphaMeta2: "Quant research",
     alphaText:
       "An exploratory automated alpha-mining system. Public presentation should focus on workflow design, factor representations, and reproducible evaluation surfaces.",
-    toolsEyebrow: "Agentic Workflow",
+    toolsEyebrow: "Agent-native Workflow",
     toolsTitle: "The foundation that makes truth-seeking repeatable.",
     wqbText:
       "A command interface for structured WorldQuant BRAIN research workflows, designed for agent usage, JSON output, endpoint inspection, and long-running job handling.",
@@ -74,14 +77,14 @@ const copy = {
       "A focused arXiv retrieval toolkit for reproducible literature search, metadata extraction, and agent-friendly research intake.",
     repo: "Repository",
     statement:
-      "Micro Truth, Macro Truth, and Social Truth are the domains. Agentic Workflow is the foundation that makes their discovery loops executable, inspectable, and repeatable.",
+      "Micro Truth, Macro Truth, and Social Truth are the domains. Agent-native Workflow is the foundation that makes their discovery loops executable, inspectable, and repeatable.",
     footerBrand: "WIZ - Wuzhiguan / untuitivist",
-    footerText: "Micro Truth, Macro Truth, and Social Truth, grounded by Agentic Workflow.",
+    footerText: "Micro Truth, Macro Truth, and Social Truth, grounded by Agent-native Workflow.",
   },
   zh: {
     pageTitle: "WIZ / \u65e0\u76f4\u89c2 / Intelligence from Within",
     metaDescription:
-      "WIZ / \u65e0\u76f4\u89c2\uff1a\u5fae\u89c2\u771f\u5b9e\u3001\u5b8f\u89c2\u771f\u5b9e\u4e0e\u793e\u4f1a\u771f\u5b9e\uff0c\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
+      "WIZ / \u65e0\u76f4\u89c2\uff1a\u5fae\u89c2\u771f\u5b9e\u3001\u5b8f\u89c2\u771f\u5b9e\u4e0e\u793e\u4f1a\u771f\u5b9e\uff0c\u4ee5 Agent \u539f\u751f\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
     brandMark: "WIZ",
     brand: "\u65e0\u76f4\u89c2 / untuitivist",
     navTheme: "\u4e3b\u7ebf",
@@ -101,9 +104,12 @@ const copy = {
     mapSocialScope: "\u96c6\u4f53\u51b3\u7b56",
     mapSocial: "\u793e\u4f1a",
     mapSocialIntro: "\u5728\u5e02\u573a\u3001\u6fc0\u52b1\u548c\u96c6\u4f53\u51b3\u7b56\u4e2d\u53d1\u73b0\u771f\u5b9e\u3002",
+    mapAgentScope: "Agent \u539f\u751f\u5de5\u4f5c\u6d41",
+    mapAgent: "Agent",
+    mapAgentIntro: "\u53ef\u6267\u884c\u884c\u52a8\u8005\uff1a\u8d1f\u8d23\u641c\u7d22\u3001\u8fd0\u884c\u3001\u68c0\u67e5\u5e76\u8fed\u4ee3\u4e09\u5c42\u771f\u5b9e\u95ed\u73af\u3002",
     themeEyebrow: "\u6838\u5fc3\u4e3b\u7ebf",
     themeTitle:
-      "\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\uff0c\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
+      "\u4ee5 Agent \u539f\u751f\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\uff0c\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
     zoneSignalTitle: "\u5fae\u89c2",
     zoneSignalText:
       "\u5fae\u89c2\u771f\u5b9e\u5173\u6ce8\u5c40\u90e8\u7269\u7406\u4fe1\u53f7\u4e2d\u7684\u771f\u5b9e\u7ed3\u6784\uff0c\u4f8b\u5982\u4f20\u611f\u5668\u3001\u673a\u68b0\u8bbe\u5907\u548c\u5c0f\u5c3a\u5ea6\u7269\u7406\u8fc7\u7a0b\u5185\u90e8\u7684\u6a21\u5f0f\u3001\u7ea6\u675f\u4e0e\u53d8\u5316\u3002",
@@ -113,9 +119,9 @@ const copy = {
     zoneWorkflowTitle: "\u793e\u4f1a",
     zoneWorkflowText:
       "\u793e\u4f1a\u771f\u5b9e\u5173\u6ce8\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u7684\u771f\u5b9e\u7ed3\u6784\uff0c\u4f8b\u5982\u5e02\u573a\u3001\u6fc0\u52b1\u3001\u4fe1\u606f\u6d41\uff0c\u4ee5\u53ca\u7531\u4eba\u548c\u673a\u6784\u884c\u4e3a\u5171\u540c\u751f\u6210\u7684\u56e0\u5b50\u6a21\u5f0f\u3002",
-    foundationTitle: "\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41",
+    foundationTitle: "Agent \u539f\u751f\u5de5\u4f5c\u6d41",
     foundationText:
-      "\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u662f\u4e09\u7c7b\u771f\u5b9e\u4e16\u754c\u7814\u7a76\u7684\u64cd\u4f5c\u5e95\u5ea7\uff1a\u901a\u8fc7\u5de5\u5177\u3001API\u3001\u811a\u672c\u548c\u754c\u9762\uff0c\u8ba9\u667a\u80fd\u4f53\u80fd\u591f\u641c\u7d22\u3001\u8fd0\u884c\u3001\u68c0\u67e5\u5e76\u8fed\u4ee3\u7814\u7a76\u6d41\u7a0b\u3002",
+      "Agent \u539f\u751f\u5de5\u4f5c\u6d41\u662f\u4e09\u7c7b\u771f\u5b9e\u4e16\u754c\u7814\u7a76\u7684\u64cd\u4f5c\u5e95\u5ea7\uff1a\u901a\u8fc7\u5de5\u5177\u3001API\u3001\u811a\u672c\u548c\u754c\u9762\uff0c\u8ba9 agent \u80fd\u591f\u641c\u7d22\u3001\u8fd0\u884c\u3001\u68c0\u67e5\u5e76\u8fed\u4ee3\u7814\u7a76\u6d41\u7a0b\u3002",
     workEyebrow: "\u4ee3\u8868\u5de5\u4f5c",
     workTitle: "\u4e09\u5c42\u771f\u5b9e\u4e2d\u7684\u4ee3\u8868\u9879\u76ee\u3002",
     pcastMeta1: "\u7814\u7a76\u4eae\u70b9",
@@ -140,7 +146,7 @@ const copy = {
     alphaMeta2: "\u91cf\u5316\u7814\u7a76",
     alphaText:
       "\u81ea\u52a8\u5316 alpha \u6316\u6398\u63a2\u7d22\u7cfb\u7edf\u3002\u516c\u5f00\u5c55\u793a\u65f6\u91cd\u70b9\u653e\u5728\u5de5\u4f5c\u6d41\u8bbe\u8ba1\u3001\u56e0\u5b50\u8868\u793a\u548c\u53ef\u590d\u73b0\u5b9e\u9a8c\u754c\u9762\u3002",
-    toolsEyebrow: "\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41",
+    toolsEyebrow: "Agent \u539f\u751f\u5de5\u4f5c\u6d41",
     toolsTitle: "\u8ba9\u771f\u5b9e\u63a2\u7d22\u53ef\u91cd\u590d\u7684\u5e95\u5ea7\u5de5\u5177\u3002",
     wqbText:
       "\u9762\u5411 WorldQuant BRAIN \u7814\u7a76\u6d41\u7a0b\u7684\u7ed3\u6784\u5316\u547d\u4ee4\u754c\u9762\uff0c\u652f\u6301\u667a\u80fd\u4f53\u4f7f\u7528\u3001JSON \u8f93\u51fa\u3001\u7aef\u70b9\u68c0\u67e5\u548c\u957f\u4efb\u52a1\u5904\u7406\u3002",
@@ -148,10 +154,10 @@ const copy = {
       "\u9762\u5411\u53ef\u590d\u73b0\u6587\u732e\u68c0\u7d22\u7684 arXiv \u5de5\u5177\uff0c\u652f\u6301\u5143\u6570\u636e\u63d0\u53d6\u548c\u667a\u80fd\u4f53\u53cb\u597d\u7684\u7814\u7a76\u8f93\u5165\u3002",
     repo: "\u4ed3\u5e93",
     statement:
-      "\u5fae\u89c2\u771f\u5b9e\u3001\u5b8f\u89c2\u771f\u5b9e\u548c\u793e\u4f1a\u771f\u5b9e\u662f\u7814\u7a76\u5bf9\u8c61\uff1b\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u662f\u5e95\u5ea7\uff0c\u4f7f\u8fd9\u4e9b\u53d1\u73b0\u8fc7\u7a0b\u53ef\u6267\u884c\u3001\u53ef\u68c0\u67e5\u3001\u53ef\u590d\u73b0\u3002",
+      "\u5fae\u89c2\u771f\u5b9e\u3001\u5b8f\u89c2\u771f\u5b9e\u548c\u793e\u4f1a\u771f\u5b9e\u662f\u7814\u7a76\u5bf9\u8c61\uff1bAgent \u539f\u751f\u5de5\u4f5c\u6d41\u662f\u5e95\u5ea7\uff0c\u4f7f\u8fd9\u4e9b\u53d1\u73b0\u8fc7\u7a0b\u53ef\u6267\u884c\u3001\u53ef\u68c0\u67e5\u3001\u53ef\u590d\u73b0\u3002",
     footerBrand: "WIZ\uff08\u82f1\u6587\u540d\uff09 - \u65e0\u76f4\u89c2 / untuitivist\uff08\u6635\u79f0\uff09",
     footerText:
-      "\u5fae\u89c2\u771f\u5b9e | \u5b8f\u89c2\u771f\u5b9e | \u793e\u4f1a\u771f\u5b9e\uff0c\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
+      "\u5fae\u89c2\u771f\u5b9e | \u5b8f\u89c2\u771f\u5b9e | \u793e\u4f1a\u771f\u5b9e\uff0c\u4ee5 Agent \u539f\u751f\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
   },
 };
 
@@ -548,9 +554,10 @@ const setupSolarSystem = () => {
     requestAnimationFrame(tick);
   };
 
-  map.querySelectorAll(".map-planet").forEach((planet) => {
+  map.querySelectorAll(".map-planet, .truth-sun").forEach((planet) => {
     planet.addEventListener("pointerenter", () => showCard(planet));
     planet.addEventListener("focus", () => showCard(planet));
+    planet.addEventListener("click", () => showCard(planet));
     planet.addEventListener("pointerleave", hideCards);
     planet.addEventListener("blur", hideCards);
   });

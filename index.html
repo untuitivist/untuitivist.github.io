@@ -9,7 +9,7 @@
     />
     <title>WIZ / Within Intelligence Zone</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/site.css?v=theme-copy-20260626" />
+    <link rel="stylesheet" href="assets/site.css?v=agent-native-workflow-20260626" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -48,7 +48,19 @@
         </div>
 
         <figure class="system-map" aria-label="A visual map of the Intelligence from Within truth layers">
-          <div class="truth-sun" role="img" aria-label="Truth / 真实"></div>
+          <button class="truth-sun" type="button" data-planet="agent" aria-label="Agent-native Workflow" aria-describedby="agent-card">
+            <svg class="truth-icon sun-core-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4"></path>
+              <path d="M12 2v2"></path>
+              <path d="M9 12v9"></path>
+              <path d="M15 12v9"></path>
+              <path d="M5 16l4 -2"></path>
+              <path d="M15 14l4 2"></path>
+              <path d="M9 18h6"></path>
+              <path d="M10 8v.01"></path>
+              <path d="M14 8v.01"></path>
+            </svg>
+          </button>
           <div class="orbit-track micro-orbit" aria-hidden="true"></div>
           <div class="planet-package" data-planet-package="micro">
             <button class="map-planet real" type="button" data-planet="micro" aria-label="Micro Truth" aria-describedby="micro-card">
@@ -60,16 +72,23 @@
           <div class="orbit-track macro-orbit" aria-hidden="true"></div>
           <div class="planet-package" data-planet-package="macro">
             <button class="map-planet latent" type="button" data-planet="macro" aria-label="Macro Truth" aria-describedby="macro-card">
-              <svg class="truth-icon embodied-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4"></path>
-                <path d="M12 2v2"></path>
-                <path d="M9 12v9"></path>
-                <path d="M15 12v9"></path>
-                <path d="M5 16l4 -2"></path>
-                <path d="M15 14l4 2"></path>
-                <path d="M9 18h6"></path>
-                <path d="M10 8v.01"></path>
-                <path d="M14 8v.01"></path>
+              <svg class="truth-icon embodied-icon robot-arm-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 21h8.8v-1.8h-8.8z"></path>
+                <path d="M5.7 19.2l1 -3.3h3.3l1 3.3"></path>
+                <circle cx="8.4" cy="15.4" r="1.25"></circle>
+                <path d="M7.1 14.4l-1.45 -6.1"></path>
+                <path d="M9.6 14.25l-1.1 -6.4"></path>
+                <circle cx="7.1" cy="7.5" r="1.65"></circle>
+                <path d="M8 6.1l4.1 -3.9h2.2"></path>
+                <path d="M8.3 8.5l5.4 -4.9"></path>
+                <circle cx="14.8" cy="3.6" r="1.15"></circle>
+                <path d="M15.6 4.45l2.9 4.2"></path>
+                <path d="M13.8 4.7l3.05 4.85"></path>
+                <circle cx="18.1" cy="9.7" r="1.25"></circle>
+                <path d="M19.2 10.35l1.9 1.2l0.45 1.9"></path>
+                <path d="M18.7 11.1l-1.4 1.35l0.3 1.9"></path>
+                <path d="M21.55 13.45l-0.65 1.65l-1.45 -0.2l0.55 -1.85"></path>
+                <path d="M17.6 14.35l1.7 0.1l0.15 1.45l-1.95 0.1"></path>
               </svg>
             </button>
           </div>
@@ -104,6 +123,11 @@
             <strong data-i18n="mapSocial">Social</strong>
             <p data-i18n="mapSocialIntro">Truth inside markets, incentives, and collective decisions.</p>
           </figcaption>
+          <figcaption class="planet-card" id="agent-card" data-planet-card="agent">
+            <span data-i18n="mapAgentScope">agent-native workflow</span>
+            <strong data-i18n="mapAgent">Agent</strong>
+            <p data-i18n="mapAgentIntro">The executable actor that searches, runs, inspects, and iterates the three truth loops.</p>
+          </figcaption>
         </figure>
       </section>
 
@@ -111,7 +135,7 @@
         <div class="section-heading">
           <p class="eyebrow" data-i18n="themeEyebrow">Core theme</p>
           <h2 data-i18n="themeTitle">
-            Built on agentic workflow, intelligence is generated from within real systems:
+            Built on agent-native workflow, intelligence is generated from within real systems:
             finding Micro Truth in physical signals, modeling Macro Truth in embodied
             environments, and discovering Social Truth in collective decision systems.
           </h2>
@@ -133,16 +157,23 @@
           <article>
             <div class="card-topline">
               <span class="index">02</span>
-              <svg class="truth-icon embodied-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4"></path>
-                <path d="M12 2v2"></path>
-                <path d="M9 12v9"></path>
-                <path d="M15 12v9"></path>
-                <path d="M5 16l4 -2"></path>
-                <path d="M15 14l4 2"></path>
-                <path d="M9 18h6"></path>
-                <path d="M10 8v.01"></path>
-                <path d="M14 8v.01"></path>
+              <svg class="truth-icon embodied-icon robot-arm-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 21h8.8v-1.8h-8.8z"></path>
+                <path d="M5.7 19.2l1 -3.3h3.3l1 3.3"></path>
+                <circle cx="8.4" cy="15.4" r="1.25"></circle>
+                <path d="M7.1 14.4l-1.45 -6.1"></path>
+                <path d="M9.6 14.25l-1.1 -6.4"></path>
+                <circle cx="7.1" cy="7.5" r="1.65"></circle>
+                <path d="M8 6.1l4.1 -3.9h2.2"></path>
+                <path d="M8.3 8.5l5.4 -4.9"></path>
+                <circle cx="14.8" cy="3.6" r="1.15"></circle>
+                <path d="M15.6 4.45l2.9 4.2"></path>
+                <path d="M13.8 4.7l3.05 4.85"></path>
+                <circle cx="18.1" cy="9.7" r="1.25"></circle>
+                <path d="M19.2 10.35l1.9 1.2l0.45 1.9"></path>
+                <path d="M18.7 11.1l-1.4 1.35l0.3 1.9"></path>
+                <path d="M21.55 13.45l-0.65 1.65l-1.45 -0.2l0.55 -1.85"></path>
+                <path d="M17.6 14.35l1.7 0.1l0.15 1.45l-1.95 0.1"></path>
               </svg>
             </div>
             <h3 data-i18n="zoneEmbodiedTitle">Macro</h3>
@@ -175,7 +206,7 @@
           <article class="foundation-card">
             <span class="index">00</span>
             <div>
-              <h3 data-i18n="foundationTitle">Agentic Workflow</h3>
+              <h3 data-i18n="foundationTitle">Agent-native Workflow</h3>
               <p data-i18n="foundationText">
                 The operating layer beneath all three truth domains: tools, APIs, scripts, and
                 interfaces that let agents search, run, inspect, and iterate research workflows.
@@ -252,7 +283,7 @@
 
       <section id="tools" class="section tools-section">
         <div class="section-heading compact">
-          <p class="eyebrow" data-i18n="toolsEyebrow">Research infrastructure</p>
+          <p class="eyebrow" data-i18n="toolsEyebrow">Agent-native Workflow</p>
           <h2 data-i18n="toolsTitle">Tools that make the loop repeatable.</h2>
         </div>
         <div class="tool-list">
@@ -299,6 +330,6 @@
       </div>
     </footer>
 
-    <script src="assets/app.js?v=theme-copy-20260626" type="module"></script>
+    <script src="assets/app.js?v=agent-native-workflow-20260626" type="module"></script>
   </body>
 </html>

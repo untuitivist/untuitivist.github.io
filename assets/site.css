@@ -376,6 +376,10 @@ h1 {
     0 0 18px rgba(245, 210, 123, 0.36);
   transform: translate(-50%, -50%);
   isolation: isolate;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .truth-sun::before,
@@ -413,6 +417,15 @@ h1 {
       transparent 74%
     );
   mix-blend-mode: screen;
+}
+
+.truth-sun:hover,
+.truth-sun:focus-visible {
+  outline: none;
+  box-shadow:
+    inset -14px -16px 24px rgba(74, 28, 14, 0.2),
+    0 0 20px rgba(245, 210, 123, 0.46),
+    0 0 54px rgba(245, 177, 74, 0.22);
 }
 
 .planet-package {
@@ -504,6 +517,16 @@ h1 {
   stroke-linejoin: round;
   opacity: 0.52;
   mix-blend-mode: screen;
+}
+
+.sun-core-icon {
+  width: calc(42px * var(--galaxy-scale));
+  height: calc(42px * var(--galaxy-scale));
+  color: rgba(18, 31, 24, 0.9);
+  stroke-width: 1.7;
+  opacity: 0.82;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 1px 4px rgba(255, 244, 190, 0.5));
 }
 
 .map-planet.latent {
