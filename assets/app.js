@@ -523,7 +523,7 @@ const setupSolarSystem = () => {
     social: "238, 133, 80",
   };
   const collisionRestitution = 0.38;
-  const collisionImpulseScale = 4.8;
+  const collisionImpulseScale = 12;
   const collisionDisplacementDamping = 0.91;
   const collisionVelocityDamping = 0.88;
   const collisionReturnStrength = 0.0042;
