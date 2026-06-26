@@ -322,37 +322,50 @@ const setupBigDipperEasterEgg = () => {
   const layer = document.querySelector("[data-dipper-layer]");
   if (!layer) return;
 
-  const storageKey = "wiz-big-dipper-misses";
+  const dipperStorageKey = "wiz-big-dipper-misses";
+  const polarisStorageKey = "wiz-big-dipper-polaris-misses";
   const safeStorage = {
-    get() {
+    get(key) {
       try {
-        return Number.parseInt(localStorage.getItem(storageKey) || "0", 10) || 0;
+        return Number.parseInt(localStorage.getItem(key) || "0", 10) || 0;
       } catch {
         return 0;
       }
     },
-    set(value) {
+    set(key, value) {
       try {
-        localStorage.setItem(storageKey, String(value));
+        localStorage.setItem(key, String(value));
       } catch {
         /* localStorage can be unavailable in strict privacy modes. */
       }
     },
   };
 
-  const misses = safeStorage.get();
-  const shouldAppear = misses >= 6 || Math.random() < 1 / 7;
+  const isLocalPreview = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+  const dipperMisses = safeStorage.get(dipperStorageKey);
+  const polarisMisses = safeStorage.get(polarisStorageKey);
+  const shouldForcePair = isLocalPreview || polarisMisses >= 48;
+  const shouldAppear = shouldForcePair || dipperMisses >= 6 || Math.random() < 1 / 7;
   if (!shouldAppear) {
-    const nextMisses = Math.min(misses + 1, 6);
-    safeStorage.set(nextMisses);
+    const nextDipperMisses = Math.min(dipperMisses + 1, 6);
+    const nextPolarisMisses = Math.min(polarisMisses + 1, 48);
+    safeStorage.set(dipperStorageKey, nextDipperMisses);
+    safeStorage.set(polarisStorageKey, nextPolarisMisses);
     layer.dataset.dipperShown = "false";
-    layer.dataset.dipperMisses = String(nextMisses);
+    layer.dataset.polarisShown = "false";
+    layer.dataset.dipperMisses = String(nextDipperMisses);
+    layer.dataset.polarisMisses = String(nextPolarisMisses);
     return;
   }
 
-  safeStorage.set(0);
+  const shouldShowPolaris = shouldForcePair || Math.random() < 1 / 7;
+  const nextPolarisMisses = shouldShowPolaris ? 0 : Math.min(polarisMisses + 1, 48);
+  safeStorage.set(dipperStorageKey, 0);
+  safeStorage.set(polarisStorageKey, nextPolarisMisses);
   layer.dataset.dipperShown = "true";
+  layer.dataset.polarisShown = String(shouldShowPolaris);
   layer.dataset.dipperMisses = "0";
+  layer.dataset.polarisMisses = String(nextPolarisMisses);
 
   const compact = window.matchMedia("(max-width: 720px)").matches;
   const randomBetween = (min, max) => min + Math.random() * (max - min);
@@ -370,6 +383,13 @@ const setupBigDipperEasterEgg = () => {
     { x: 114, y: 23, major: true },
     { x: 139, y: 15, major: true },
   ];
+  const pointerFromMerak = points[1];
+  const pointerThroughDubhe = points[0];
+  const polarisDistanceRatio = 4.9;
+  const polaris = {
+    x: pointerThroughDubhe.x + (pointerThroughDubhe.x - pointerFromMerak.x) * polarisDistanceRatio,
+    y: pointerThroughDubhe.y + (pointerThroughDubhe.y - pointerFromMerak.y) * polarisDistanceRatio,
+  };
   const edges = [
     [0, 1],
     [1, 2],
@@ -384,11 +404,12 @@ const setupBigDipperEasterEgg = () => {
   const lineDuration = 720;
   const lineBaseDelay = flashDelay + flashDuration + 160;
   const lineStagger = lineDuration;
+  const polarisDelay = lineBaseDelay + edges.length * lineStagger + 280;
   const connectDelays = points.map(() => Number.POSITIVE_INFINITY);
   const svgNamespace = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNamespace, "svg");
   svg.classList.add("big-dipper");
-  svg.setAttribute("viewBox", "0 0 160 90");
+  svg.setAttribute("viewBox", "-92 -42 252 132");
   svg.setAttribute("role", "img");
   svg.style.setProperty("--dipper-x", `${x}%`);
   svg.style.setProperty("--dipper-y", `${y}%`);
@@ -424,6 +445,16 @@ const setupBigDipperEasterEgg = () => {
     star.style.setProperty("--connect-delay", `${Number.isFinite(connectDelays[index]) ? connectDelays[index] : lineBaseDelay}ms`);
     svg.append(star);
   });
+
+  if (shouldShowPolaris) {
+    const star = document.createElementNS(svgNamespace, "circle");
+    star.classList.add("polaris-star");
+    star.setAttribute("cx", String(polaris.x));
+    star.setAttribute("cy", String(polaris.y));
+    star.setAttribute("r", "2.6");
+    star.style.setProperty("--polaris-delay", `${polarisDelay}ms`);
+    svg.append(star);
+  }
 
   layer.replaceChildren(svg);
 };

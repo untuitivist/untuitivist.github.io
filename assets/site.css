@@ -234,6 +234,16 @@ a {
     dipper-star-brighten 520ms ease-out var(--connect-delay, 0ms) forwards;
 }
 
+.polaris-star {
+  fill: rgba(255, 255, 255, 1);
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 8px rgba(246, 252, 255, 1))
+    drop-shadow(0 0 26px rgba(126, 194, 255, 0.74))
+    drop-shadow(0 0 42px rgba(126, 194, 255, 0.34));
+  animation: polaris-appear 760ms ease-out var(--polaris-delay, 0ms) forwards;
+}
+
 @keyframes dipper-line-grow {
   0% {
     opacity: 0;
@@ -296,6 +306,26 @@ a {
   }
 }
 
+@keyframes polaris-appear {
+  0% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 11px rgba(246, 252, 255, 1))
+      drop-shadow(0 0 34px rgba(126, 194, 255, 0.86))
+      drop-shadow(0 0 56px rgba(126, 194, 255, 0.42));
+  }
+  100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 8px rgba(246, 252, 255, 1))
+      drop-shadow(0 0 26px rgba(126, 194, 255, 0.74))
+      drop-shadow(0 0 42px rgba(126, 194, 255, 0.34));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .dipper-line {
     animation: none;
@@ -306,6 +336,11 @@ a {
     animation: none;
     opacity: 0.48;
     fill: rgba(218, 235, 247, 0.72);
+  }
+
+  .polaris-star {
+    animation: none;
+    opacity: 1;
   }
 }
 
