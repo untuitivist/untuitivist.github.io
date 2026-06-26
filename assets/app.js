@@ -21,7 +21,6 @@ const copy = {
     brandNote:
       "Concepts need intuition; intuition needs concepts. Knowledge becomes possible when the two are joined.",
     viewWork: "View selected work",
-    mapTruth: "Truth",
     mapMicroScope: "physical signal",
     mapMicro: "Micro",
     mapMicroIntro: "Truth inside physical signals and local sensor structures.",
@@ -98,7 +97,6 @@ const copy = {
     brandNote:
       "\u6982\u5ff5\u65e0\u76f4\u89c2\u5219\u7a7a\uff0c\u76f4\u89c2\u65e0\u6982\u5ff5\u5219\u76f2\uff1b\u4e24\u8005\u7ed3\u5408\uff0c\u77e5\u8bc6\u65b9\u5f97\u53ef\u80fd\u3002",
     viewWork: "\u67e5\u770b\u4ee3\u8868\u5de5\u4f5c",
-    mapTruth: "\u771f\u5b9e",
     mapMicroScope: "\u7269\u7406\u4fe1\u53f7",
     mapMicro: "\u5fae\u89c2",
     mapMicroIntro: "\u4ece\u7269\u7406\u4fe1\u53f7\u548c\u5c40\u90e8\u4f20\u611f\u7ed3\u6784\u4e2d\u63d0\u53d6\u771f\u5b9e\u3002",
