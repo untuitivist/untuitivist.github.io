@@ -195,6 +195,7 @@ a {
 }
 
 .system-map {
+  --galaxy-scale: 1;
   position: relative;
   z-index: 2;
   align-self: start;
@@ -283,6 +284,24 @@ h1 {
   mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
 }
 
+.system-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.52) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(163, 197, 255, 0.32) 0 1px, transparent 1.6px);
+  background-position:
+    12px 18px,
+    44px 58px;
+  background-size:
+    calc(92px * var(--galaxy-scale)) calc(94px * var(--galaxy-scale)),
+    calc(138px * var(--galaxy-scale)) calc(126px * var(--galaxy-scale));
+  opacity: 0.42;
+  pointer-events: none;
+}
+
 .orbit-track {
   --orbit-width: 72%;
   --orbit-height: 44%;
@@ -341,8 +360,8 @@ h1 {
   left: 50%;
   top: 50%;
   z-index: 3;
-  width: 110px;
-  height: 110px;
+  width: calc(110px * var(--galaxy-scale));
+  height: calc(110px * var(--galaxy-scale));
   display: grid;
   place-items: center;
   border: 1px solid rgba(184, 93, 51, 0.34);
@@ -359,12 +378,13 @@ h1 {
 
 .truth-sun strong {
   color: #17211b;
-  font-size: 23px;
+  font-size: calc(23px * var(--galaxy-scale));
   letter-spacing: 0;
 }
 
 .planet-package {
   position: absolute;
+  z-index: 3;
   left: var(--planet-x, 50%);
   top: var(--planet-y, 50%);
   display: grid;
@@ -374,8 +394,8 @@ h1 {
 }
 
 .map-planet {
-  width: 44px;
-  height: 44px;
+  width: calc(44px * var(--galaxy-scale));
+  height: calc(44px * var(--galaxy-scale));
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
@@ -400,8 +420,8 @@ h1 {
 
 .truth-icon {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: calc(22px * var(--galaxy-scale));
+  height: calc(22px * var(--galaxy-scale));
   color: #f7fff9;
   fill: none;
   stroke: currentColor;
@@ -733,28 +753,15 @@ h1 {
   }
 
   .truth-sun {
-    width: 66px;
-    height: 66px;
     box-shadow:
       0 0 0 12px rgba(222, 169, 83, 0.12),
       0 18px 34px rgba(111, 65, 31, 0.18);
   }
 
-  .truth-sun strong {
-    font-size: 15px;
-  }
-
   .map-planet {
-    width: 34px;
-    height: 34px;
     box-shadow:
       0 0 0 6px rgba(255, 255, 255, 0.08),
       0 0 30px currentColor;
-  }
-
-  .truth-icon {
-    width: 18px;
-    height: 18px;
   }
 
   .planet-card {
