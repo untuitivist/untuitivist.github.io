@@ -522,11 +522,12 @@ const setupSolarSystem = () => {
     macro: "85, 158, 218",
     social: "238, 133, 80",
   };
-  const collisionRestitution = 0.92;
-  const collisionImpulseScale = 18;
-  const collisionDisplacementDamping = 0.965;
-  const collisionVelocityDamping = 0.975;
-  const collisionReturnStrength = 0.0009;
+  const collisionRestitution = 0.38;
+  const collisionImpulseScale = 4.8;
+  const collisionDisplacementDamping = 0.91;
+  const collisionVelocityDamping = 0.88;
+  const collisionReturnStrength = 0.0042;
+  const maxCollisionKick = 2.8;
   let activePlanet = null;
   let orbitState = [];
   let lastFrame = performance.now();
@@ -548,9 +549,18 @@ const setupSolarSystem = () => {
     y: x * Math.sin(angle) + y * Math.cos(angle),
   });
 
+  const limitVector = (vector, maxLength) => {
+    const length = Math.hypot(vector.x, vector.y);
+    if (length <= maxLength || length === 0) return vector;
+    return {
+      x: (vector.x / length) * maxLength,
+      y: (vector.y / length) * maxLength,
+    };
+  };
+
   const getPlanetMass = (state) => Math.max(1, Math.PI * Math.pow(state.renderedRadius || state.radius || 1, 2));
 
-  const applyElasticCollision = (first, second) => {
+  const applyInelasticCollision = (first, second) => {
     const dx = second.position.x - first.position.x;
     const dy = second.position.y - first.position.y;
     const distance = Math.hypot(dx, dy) || 1;
@@ -572,14 +582,14 @@ const setupSolarSystem = () => {
       ((massSecond - collisionRestitution * massFirst) * secondNormal +
         (1 + collisionRestitution) * massFirst * firstNormal) /
       (massFirst + massSecond);
-    const firstKick = {
+    const firstKick = limitVector({
       x: (normal.x * nextFirstNormal + tangent.x * firstTangent - velocityFirst.x) * collisionImpulseScale,
       y: (normal.y * nextFirstNormal + tangent.y * firstTangent - velocityFirst.y) * collisionImpulseScale,
-    };
-    const secondKick = {
+    }, maxCollisionKick);
+    const secondKick = limitVector({
       x: (normal.x * nextSecondNormal + tangent.x * secondTangent - velocitySecond.x) * collisionImpulseScale,
       y: (normal.y * nextSecondNormal + tangent.y * secondTangent - velocitySecond.y) * collisionImpulseScale,
-    };
+    }, maxCollisionKick);
     const overlap = Math.max(0, first.renderedRadius + second.renderedRadius - distance);
     const separation = overlap * 0.54 + 3;
 
@@ -624,7 +634,7 @@ const setupSolarSystem = () => {
 
     lastCollisionAt = now;
     lastCollisionPair = pair;
-    applyElasticCollision(first, second);
+    applyInelasticCollision(first, second);
 
     const impact = {
       x: (first.position.x + second.position.x) / 2,
