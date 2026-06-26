@@ -318,6 +318,107 @@ const setupCosmosField = () => {
   window.addEventListener("resize", refresh);
 };
 
+const setupBigDipperEasterEgg = () => {
+  const layer = document.querySelector("[data-dipper-layer]");
+  if (!layer) return;
+
+  const storageKey = "wiz-big-dipper-misses";
+  const safeStorage = {
+    get() {
+      try {
+        return Number.parseInt(localStorage.getItem(storageKey) || "0", 10) || 0;
+      } catch {
+        return 0;
+      }
+    },
+    set(value) {
+      try {
+        localStorage.setItem(storageKey, String(value));
+      } catch {
+        /* localStorage can be unavailable in strict privacy modes. */
+      }
+    },
+  };
+
+  const misses = safeStorage.get();
+  const shouldAppear = misses >= 6 || Math.random() < 1 / 7;
+  if (!shouldAppear) {
+    const nextMisses = Math.min(misses + 1, 6);
+    safeStorage.set(nextMisses);
+    layer.dataset.dipperShown = "false";
+    layer.dataset.dipperMisses = String(nextMisses);
+    return;
+  }
+
+  safeStorage.set(0);
+  layer.dataset.dipperShown = "true";
+  layer.dataset.dipperMisses = "0";
+
+  const compact = window.matchMedia("(max-width: 720px)").matches;
+  const randomBetween = (min, max) => min + Math.random() * (max - min);
+  const x = randomBetween(compact ? 18 : 10, compact ? 82 : 88);
+  const y = randomBetween(compact ? 18 : 12, compact ? 82 : 76);
+  const scale = randomBetween(compact ? 0.62 : 0.72, compact ? 0.9 : 1.18);
+  const rotate = randomBetween(-28, 24);
+
+  const points = [
+    { x: 24, y: 55, major: true },
+    { x: 45, y: 72, major: false },
+    { x: 70, y: 58, major: true },
+    { x: 58, y: 34, major: true },
+    { x: 88, y: 29, major: false },
+    { x: 114, y: 23, major: true },
+    { x: 139, y: 15, major: true },
+  ];
+  const edges = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 0],
+    [3, 4],
+    [4, 5],
+    [5, 6],
+  ];
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNamespace, "svg");
+  svg.classList.add("big-dipper");
+  svg.setAttribute("viewBox", "0 0 160 90");
+  svg.setAttribute("role", "img");
+  svg.style.setProperty("--dipper-x", `${x}%`);
+  svg.style.setProperty("--dipper-y", `${y}%`);
+  svg.style.setProperty("--dipper-scale", scale.toFixed(3));
+  svg.style.setProperty("--dipper-rotate", `${rotate.toFixed(1)}deg`);
+
+  edges.forEach(([fromIndex, toIndex], index) => {
+    const from = points[fromIndex];
+    const to = points[toIndex];
+    const line = document.createElementNS(svgNamespace, "line");
+    const length = Math.hypot(to.x - from.x, to.y - from.y);
+    line.classList.add("dipper-line");
+    line.setAttribute("x1", String(from.x));
+    line.setAttribute("y1", String(from.y));
+    line.setAttribute("x2", String(to.x));
+    line.setAttribute("y2", String(to.y));
+    line.style.setProperty("--delay", `${180 + index * 260}ms`);
+    line.style.setProperty("--line-length", length.toFixed(2));
+    svg.append(line);
+  });
+
+  points.forEach((point, index) => {
+    const star = document.createElementNS(svgNamespace, "circle");
+    const delay = index === 0 ? 80 : 560 + (index - 1) * 260;
+    star.classList.add("dipper-star");
+    if (point.major) star.classList.add("major");
+    star.setAttribute("cx", String(point.x));
+    star.setAttribute("cy", String(point.y));
+    star.setAttribute("r", point.major ? "2.2" : "1.75");
+    star.style.setProperty("--delay", `${delay}ms`);
+    svg.append(star);
+  });
+
+  layer.replaceChildren(svg);
+};
+
 const setupSolarSystem = () => {
   const map = document.querySelector(".system-map");
   if (!map) return;
@@ -374,12 +475,12 @@ const setupSolarSystem = () => {
     social: 7.5,
   };
   const iconRadiusThresholds = {
-    micro: 12,
+    micro: 10,
     macro: 13,
     social: 15,
   };
   const minSunRadius = 17;
-  const sunIconRadiusThreshold = 34;
+  const sunIconRadiusThreshold = 28;
   const collisionLayer = map.querySelector("[data-collision-layer]");
   const collisionCooldownMs = 9000;
   const planetColors = {
@@ -728,6 +829,7 @@ const setupSolarSystem = () => {
 setHeaderState();
 applyLanguage(currentLanguage);
 setupCosmosField();
+setupBigDipperEasterEgg();
 setupSolarSystem();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 langToggle?.addEventListener("click", () => {
