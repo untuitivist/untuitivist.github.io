@@ -362,8 +362,8 @@ h1 {
   left: var(--sun-x, 50%);
   top: var(--sun-y, 50%);
   z-index: 3;
-  width: calc(110px * var(--galaxy-scale));
-  height: calc(110px * var(--galaxy-scale));
+  width: var(--sun-size, 110px);
+  height: var(--sun-size, 110px);
   display: grid;
   place-items: center;
   border: 1px solid rgba(184, 93, 51, 0.34);
@@ -442,8 +442,11 @@ h1 {
 .map-planet {
   --planet-glow-rgb: 116, 215, 176;
   position: relative;
-  width: calc(var(--planet-size, 44px) * var(--galaxy-scale));
-  height: calc(var(--planet-size, 44px) * var(--galaxy-scale));
+  width: var(--planet-size, 44px);
+  height: var(--planet-size, 44px);
+  min-width: var(--planet-size, 44px);
+  min-height: var(--planet-size, 44px);
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
@@ -511,8 +514,8 @@ h1 {
   position: relative;
   z-index: 2;
   display: block;
-  width: calc(18px * var(--galaxy-scale));
-  height: calc(18px * var(--galaxy-scale));
+  width: var(--planet-icon-size, 18px);
+  height: var(--planet-icon-size, 18px);
   color: #f7fff9;
   fill: none;
   stroke: currentColor;
@@ -524,8 +527,8 @@ h1 {
 }
 
 .sun-core-icon {
-  width: calc(42px * var(--galaxy-scale));
-  height: calc(42px * var(--galaxy-scale));
+  width: var(--sun-icon-size, 42px);
+  height: var(--sun-icon-size, 42px);
   color: rgba(18, 31, 24, 0.9);
   stroke-width: 1.7;
   opacity: 0.82;

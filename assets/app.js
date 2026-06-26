@@ -368,6 +368,12 @@ const setupSolarSystem = () => {
   const orbitPadding = 18;
   const designBoundsSafety = 1.02;
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  const minPlanetRadii = {
+    micro: 12,
+    macro: 13,
+    social: 15,
+  };
+  const minSunRadius = 34;
   const collisionLayer = map.querySelector("[data-collision-layer]");
   const collisionCooldownMs = 9000;
   const planetColors = {
@@ -568,6 +574,9 @@ const setupSolarSystem = () => {
     const galaxyScale = Math.min(1, mapRect.width / requiredSize.width, mapRect.height / requiredSize.height);
     map.style.setProperty("--galaxy-scale", galaxyScale.toFixed(4));
     map.style.setProperty("--orbit-axis-upper", `${maxSemiMajor * galaxyScale}px`);
+    const sunDiameter = Math.max(110 * galaxyScale, minSunRadius * 2);
+    map.style.setProperty("--sun-size", `${sunDiameter}px`);
+    map.style.setProperty("--sun-icon-size", `${Math.max(42 * galaxyScale, 26)}px`);
 
     const measuredMapRect = map.getBoundingClientRect();
     const focus = {
@@ -597,12 +606,16 @@ const setupSolarSystem = () => {
           y: focus.y + designOrbit.centerOffset.y * galaxyScale,
         };
 
+        const renderedRadius = Math.max(config.radius * galaxyScale, minPlanetRadii[config.key] || 12);
+        const renderedDiameter = renderedRadius * 2;
+
         track.style.setProperty("--orbit-width", `${semiMajor * 2}px`);
         track.style.setProperty("--orbit-height", `${semiMinor * 2}px`);
         track.style.setProperty("--orbit-left", `${center.x}px`);
         track.style.setProperty("--orbit-top", `${center.y}px`);
         track.style.setProperty("--tilt", `${config.tilt}deg`);
-        planet.style.setProperty("--planet-size", `${config.radius * 2}px`);
+        planet.style.setProperty("--planet-size", `${renderedDiameter}px`);
+        planet.style.setProperty("--planet-icon-size", `${Math.max(renderedDiameter * 0.42, 13)}px`);
 
         return {
           ...config,
@@ -611,6 +624,7 @@ const setupSolarSystem = () => {
           packageNode,
           card,
           focus,
+          renderedRadius,
           semiMajor,
           semiMinor,
           tilt,
@@ -655,7 +669,7 @@ const setupSolarSystem = () => {
         const first = orbitState[firstIndex];
         const second = orbitState[secondIndex];
         const distance = Math.hypot(first.position.x - second.position.x, first.position.y - second.position.y);
-        const threshold = (first.radius + second.radius) * (first.galaxyScale || 1) * 0.88;
+        const threshold = (first.renderedRadius + second.renderedRadius) * 0.88;
         if (distance <= threshold) {
           triggerCollision(first, second, now);
           return;
