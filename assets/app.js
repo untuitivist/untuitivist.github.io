@@ -203,9 +203,8 @@ const setupSolarSystem = () => {
     {
       key: "micro",
       selector: ".micro-orbit",
-      orbitScale: 1.15,
-      eccentricity: 0.58,
-      tilt: -6,
+      orbitScale: 1,
+      tilt: -12,
       period: 17000,
       phase: 0.25,
       radius: 18,
@@ -213,9 +212,8 @@ const setupSolarSystem = () => {
     {
       key: "macro",
       selector: ".macro-orbit",
-      orbitScale: 1.95,
-      eccentricity: 0.52,
-      tilt: 8,
+      orbitScale: 1.65,
+      tilt: 108,
       period: 43000,
       phase: 2.35,
       radius: 24,
@@ -223,9 +221,8 @@ const setupSolarSystem = () => {
     {
       key: "social",
       selector: ".social-orbit",
-      orbitScale: 3.45,
-      eccentricity: 0.62,
-      tilt: -4,
+      orbitScale: 2.45,
+      tilt: 228,
       period: 88000,
       phase: 4.2,
       radius: 31,
@@ -233,9 +230,10 @@ const setupSolarSystem = () => {
   ];
 
   const twoPi = Math.PI * 2;
-  const basePlanetRadius = Math.max(...orbitConfigs.map((config) => config.radius));
   const baseSunRadius = 55;
-  const baseInnerSemiMajor = 142;
+  const orbitAspectRatio = 0.72;
+  const orbitEccentricity = Math.sqrt(1 - orbitAspectRatio * orbitAspectRatio);
+  const baseOrbitGap = 120;
   const orbitPadding = 18;
   const designBoundsSafety = 1.08;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -306,10 +304,10 @@ const setupSolarSystem = () => {
     const mapRect = map.getBoundingClientRect();
 
     const designOrbits = orbitConfigs.map((config) => {
-      const eccentricity = config.eccentricity;
+      const eccentricity = orbitEccentricity;
       const innerLimit = (baseSunRadius + config.radius + 12) / (1 - eccentricity);
-      const semiMajor = Math.max(innerLimit, baseInnerSemiMajor * config.orbitScale);
-      const semiMinor = semiMajor * Math.sqrt(1 - eccentricity * eccentricity);
+      const semiMajor = innerLimit + baseOrbitGap * (config.orbitScale - 1);
+      const semiMinor = semiMajor * orbitAspectRatio;
       const tilt = toRadians(config.tilt);
       const yExtent = Math.sqrt(
         Math.pow(semiMajor * Math.sin(tilt), 2) + Math.pow(semiMinor * Math.cos(tilt), 2)
@@ -317,21 +315,36 @@ const setupSolarSystem = () => {
       const xExtent = Math.sqrt(
         Math.pow(semiMajor * Math.cos(tilt), 2) + Math.pow(semiMinor * Math.sin(tilt), 2)
       );
+      const focusOffset = semiMajor * eccentricity;
+      const centerOffset = rotatePoint(-focusOffset, 0, tilt);
+      const paddedRadius = config.radius + orbitPadding;
       return {
         ...config,
         semiMajor,
         semiMinor,
+        centerOffset,
         xExtent,
         yExtent,
+        minX: centerOffset.x - xExtent - paddedRadius,
+        maxX: centerOffset.x + xExtent + paddedRadius,
+        minY: centerOffset.y - yExtent - paddedRadius,
+        maxY: centerOffset.y + yExtent + paddedRadius,
       };
     });
 
-    const requiredSize = designOrbits.reduce((size, orbit) => {
+    const orbitBounds = designOrbits.reduce((bounds, orbit) => {
       return {
-        width: Math.max(size.width, (orbit.xExtent + basePlanetRadius + orbitPadding) * 2 * designBoundsSafety),
-        height: Math.max(size.height, (orbit.yExtent + basePlanetRadius + orbitPadding) * 2 * designBoundsSafety),
+        minX: Math.min(bounds.minX, orbit.minX),
+        maxX: Math.max(bounds.maxX, orbit.maxX),
+        minY: Math.min(bounds.minY, orbit.minY),
+        maxY: Math.max(bounds.maxY, orbit.maxY),
       };
-    }, { width: 0, height: 0 });
+    }, { minX: 0, maxX: 0, minY: 0, maxY: 0 });
+
+    const requiredSize = {
+      width: (orbitBounds.maxX - orbitBounds.minX) * designBoundsSafety,
+      height: (orbitBounds.maxY - orbitBounds.minY) * designBoundsSafety,
+    };
 
     const galaxyScale = Math.min(1, mapRect.width / requiredSize.width, mapRect.height / requiredSize.height);
     map.style.setProperty("--galaxy-scale", galaxyScale.toFixed(4));
@@ -339,10 +352,13 @@ const setupSolarSystem = () => {
     map.style.minHeight = `${Math.ceil(requiredSize.height * galaxyScale)}px`;
 
     const measuredMapRect = map.getBoundingClientRect();
-    const focusOffsetX = measuredMapRect.width > 520 ? measuredMapRect.width * 0.12 : 0;
+    const scaledBoundsWidth = (orbitBounds.maxX - orbitBounds.minX) * galaxyScale;
+    const scaledBoundsHeight = (orbitBounds.maxY - orbitBounds.minY) * galaxyScale;
+    const spareX = Math.max(0, measuredMapRect.width - scaledBoundsWidth);
+    const spareY = Math.max(0, measuredMapRect.height - scaledBoundsHeight);
     const focus = {
-      x: measuredMapRect.width / 2 + focusOffsetX,
-      y: measuredMapRect.height / 2,
+      x: -orbitBounds.minX * galaxyScale + spareX * 0.58,
+      y: -orbitBounds.minY * galaxyScale + spareY * 0.5,
     };
 
     map.style.setProperty("--sun-x", `${focus.x}px`);
@@ -361,12 +377,10 @@ const setupSolarSystem = () => {
 
         const semiMajor = designOrbit.semiMajor * galaxyScale;
         const semiMinor = designOrbit.semiMinor * galaxyScale;
-        const focusOffset = semiMajor * config.eccentricity;
         const tilt = toRadians(config.tilt);
-        const centerOffset = rotatePoint(-focusOffset, 0, tilt);
         const center = {
-          x: focus.x + centerOffset.x,
-          y: focus.y + centerOffset.y,
+          x: focus.x + designOrbit.centerOffset.x * galaxyScale,
+          y: focus.y + designOrbit.centerOffset.y * galaxyScale,
         };
 
         track.style.setProperty("--orbit-width", `${semiMajor * 2}px`);
