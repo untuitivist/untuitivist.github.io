@@ -369,8 +369,8 @@ h1 {
 }
 
 .map-planet {
-  width: 74px;
-  height: 74px;
+  width: 58px;
+  height: 58px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
@@ -395,8 +395,8 @@ h1 {
 
 .truth-icon {
   display: block;
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   color: #f7fff9;
   fill: none;
   stroke: currentColor;
@@ -740,16 +740,16 @@ h1 {
   }
 
   .map-planet {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     box-shadow:
       0 0 0 6px rgba(255, 255, 255, 0.08),
       0 0 30px currentColor;
   }
 
   .truth-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .planet-card {
