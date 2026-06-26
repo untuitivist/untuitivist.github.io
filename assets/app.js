@@ -14,7 +14,6 @@ const copy = {
     navWork: "Work",
     navTools: "Tools",
     navContact: "Contact",
-    heroEyebrow: "WIZ - nicknames: Wuzhiguan / untuitivist",
     heroTitle: "Intelligence from Within",
     heroLead:
       "WIZ studies intelligence from within real systems: Micro Truth in physical signals, Macro Truth in embodied environments, and Social Truth in collective decision systems.",
@@ -90,7 +89,6 @@ const copy = {
     navWork: "\u6210\u679c",
     navTools: "\u5de5\u5177",
     navContact: "\u8054\u7cfb",
-    heroEyebrow: "WIZ\uff08\u82f1\u6587\u540d\uff09 - \u6635\u79f0\uff1a\u65e0\u76f4\u89c2 / untuitivist",
     heroTitle: "Intelligence from Within",
     heroLead:
       "\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
@@ -426,7 +424,6 @@ const setupSolarSystem = () => {
 
   const layoutOrbits = () => {
     map.style.setProperty("--galaxy-scale", "1");
-    map.style.minHeight = "";
     const mapRect = map.getBoundingClientRect();
     const maxSemiMajor = Math.max(Math.min(mapRect.width, mapRect.height) * 0.68, 720);
 
@@ -468,8 +465,6 @@ const setupSolarSystem = () => {
     const galaxyScale = Math.min(1, mapRect.width / requiredSize.width, mapRect.height / requiredSize.height);
     map.style.setProperty("--galaxy-scale", galaxyScale.toFixed(4));
     map.style.setProperty("--orbit-axis-upper", `${maxSemiMajor * galaxyScale}px`);
-
-    map.style.minHeight = `${Math.ceil(requiredSize.height * galaxyScale)}px`;
 
     const measuredMapRect = map.getBoundingClientRect();
     const focus = {
