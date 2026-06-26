@@ -369,11 +369,11 @@ const setupSolarSystem = () => {
   const designBoundsSafety = 1.02;
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
   const minPlanetRadii = {
-    micro: 12,
-    macro: 13,
-    social: 15,
+    micro: 6,
+    macro: 6.5,
+    social: 7.5,
   };
-  const minSunRadius = 34;
+  const minSunRadius = 17;
   const collisionLayer = map.querySelector("[data-collision-layer]");
   const collisionCooldownMs = 9000;
   const planetColors = {

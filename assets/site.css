@@ -441,9 +441,13 @@ h1 {
 
 .map-planet {
   --planet-glow-rgb: 116, 215, 176;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
   position: relative;
   width: var(--planet-size, 44px);
   height: var(--planet-size, 44px);
+  aspect-ratio: 1 / 1;
   min-width: var(--planet-size, 44px);
   min-height: var(--planet-size, 44px);
   flex: 0 0 auto;
@@ -451,6 +455,8 @@ h1 {
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 50%;
+  padding: 0;
+  line-height: 0;
   cursor: pointer;
   background:
     radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.74), transparent 15%),
