@@ -388,7 +388,7 @@ h1 {
   max-width: 920px;
   margin-bottom: 16px;
   font-size: clamp(40px, 5.2vw, 76px);
-  line-height: 0.94;
+  line-height: 1.04;
   letter-spacing: 0;
   text-shadow: 0 0 34px rgba(245, 210, 123, 0.16);
 }
