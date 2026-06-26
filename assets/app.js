@@ -379,6 +379,12 @@ const setupBigDipperEasterEgg = () => {
     [4, 5],
     [5, 6],
   ];
+  const flashDelay = 220;
+  const flashDuration = 720;
+  const lineDuration = 720;
+  const lineBaseDelay = flashDelay + flashDuration + 160;
+  const lineStagger = 300;
+  const connectDelays = points.map(() => lineBaseDelay);
   const svgNamespace = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNamespace, "svg");
   svg.classList.add("big-dipper");
@@ -394,25 +400,28 @@ const setupBigDipperEasterEgg = () => {
     const to = points[toIndex];
     const line = document.createElementNS(svgNamespace, "line");
     const length = Math.hypot(to.x - from.x, to.y - from.y);
+    const delay = lineBaseDelay + index * lineStagger;
+    connectDelays[fromIndex] = Math.min(connectDelays[fromIndex], delay);
+    connectDelays[toIndex] = Math.min(connectDelays[toIndex], delay + lineDuration);
     line.classList.add("dipper-line");
     line.setAttribute("x1", String(from.x));
     line.setAttribute("y1", String(from.y));
     line.setAttribute("x2", String(to.x));
     line.setAttribute("y2", String(to.y));
-    line.style.setProperty("--delay", `${180 + index * 260}ms`);
+    line.style.setProperty("--delay", `${delay}ms`);
     line.style.setProperty("--line-length", length.toFixed(2));
     svg.append(line);
   });
 
   points.forEach((point, index) => {
     const star = document.createElementNS(svgNamespace, "circle");
-    const delay = index === 0 ? 80 : 560 + (index - 1) * 260;
     star.classList.add("dipper-star");
     if (point.major) star.classList.add("major");
     star.setAttribute("cx", String(point.x));
     star.setAttribute("cy", String(point.y));
     star.setAttribute("r", point.major ? "2.2" : "1.75");
-    star.style.setProperty("--delay", `${delay}ms`);
+    star.style.setProperty("--flash-delay", `${flashDelay}ms`);
+    star.style.setProperty("--connect-delay", `${connectDelays[index]}ms`);
     svg.append(star);
   });
 
