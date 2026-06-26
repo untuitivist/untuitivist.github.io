@@ -693,7 +693,7 @@ h1 {
   }
 
   .system-map {
-    min-height: 430px;
+    min-height: 620px;
   }
 
   .project-card.feature {
@@ -709,7 +709,7 @@ h1 {
 
   .system-map {
     width: 100%;
-    min-height: 430px;
+    min-height: 520px;
   }
 
   .micro-orbit {
@@ -728,28 +728,28 @@ h1 {
   }
 
   .truth-sun {
-    width: 86px;
-    height: 86px;
+    width: 66px;
+    height: 66px;
     box-shadow:
       0 0 0 12px rgba(222, 169, 83, 0.12),
       0 18px 34px rgba(111, 65, 31, 0.18);
   }
 
   .truth-sun strong {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .map-planet {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     box-shadow:
       0 0 0 6px rgba(255, 255, 255, 0.08),
       0 0 30px currentColor;
   }
 
   .truth-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .planet-card {

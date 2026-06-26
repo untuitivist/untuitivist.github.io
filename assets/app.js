@@ -204,6 +204,7 @@ const setupSolarSystem = () => {
       key: "micro",
       selector: ".micro-orbit",
       majorRatio: 0.34,
+      compactMajorRatio: 0.36,
       eccentricity: 0.16,
       tilt: -16,
       period: 17000,
@@ -213,6 +214,7 @@ const setupSolarSystem = () => {
       key: "macro",
       selector: ".macro-orbit",
       majorRatio: 0.4,
+      compactMajorRatio: 0.68,
       eccentricity: 0.22,
       tilt: 24,
       period: 26000,
@@ -222,6 +224,7 @@ const setupSolarSystem = () => {
       key: "social",
       selector: ".social-orbit",
       majorRatio: 0.96,
+      compactMajorRatio: 1,
       eccentricity: 0.2,
       tilt: -34,
       period: 36000,
@@ -307,7 +310,8 @@ const setupSolarSystem = () => {
         const card = map.querySelector(`[data-planet-card="${config.key}"]`);
         if (!track || !planet || !packageNode || !card) return null;
 
-        const maxMajor = (mapRect.width * config.majorRatio) / 2;
+        const majorRatio = mapRect.width < 520 ? config.compactMajorRatio : config.majorRatio;
+        const maxMajor = (mapRect.width * majorRatio) / 2;
         const eccentricity = config.eccentricity;
         const planetRadius = Math.max(planet.offsetWidth, planet.offsetHeight) / 2 || 38;
         const sun = map.querySelector(".truth-sun");
