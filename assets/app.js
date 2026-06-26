@@ -195,6 +195,114 @@ const applyLanguage = (language) => {
   currentLanguage = language;
 };
 
+const setupCosmosField = () => {
+  const canvas = document.querySelector("[data-cosmos-field]");
+  if (!canvas) return;
+
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const random = (seed) => {
+    let value = seed;
+    return () => {
+      value = (value * 1664525 + 1013904223) % 4294967296;
+      return value / 4294967296;
+    };
+  };
+
+  let stars = [];
+  let nebulas = [];
+  let animationFrame = 0;
+
+  const buildField = () => {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const nextRandom = random(Math.floor(rect.width * 31 + rect.height * 17 + 20260626));
+    const area = rect.width * rect.height;
+    const starCount = Math.min(900, Math.max(260, Math.floor(area / 2100)));
+
+    nebulas = Array.from({ length: 5 }, (_, index) => ({
+      x: rect.width * (0.46 + nextRandom() * 0.42),
+      y: rect.height * (0.18 + nextRandom() * 0.72),
+      rx: rect.width * (0.12 + nextRandom() * 0.18),
+      ry: rect.height * (0.08 + nextRandom() * 0.2),
+      hue: [38, 160, 210, 24, 190][index],
+      alpha: 0.025 + nextRandom() * 0.04,
+    }));
+
+    stars = Array.from({ length: starCount }, () => {
+      const clusterPull = nextRandom();
+      const clusterX = rect.width * (0.56 + nextRandom() * 0.34);
+      const clusterY = rect.height * (0.24 + nextRandom() * 0.58);
+      const x = clusterPull > 0.72 ? clusterX + (nextRandom() - 0.5) * rect.width * 0.22 : nextRandom() * rect.width;
+      const y = clusterPull > 0.72 ? clusterY + (nextRandom() - 0.5) * rect.height * 0.22 : nextRandom() * rect.height;
+      const depth = nextRandom();
+      const warm = nextRandom() > 0.76;
+      const cool = !warm && nextRandom() > 0.72;
+
+      return {
+        x: Math.max(0, Math.min(rect.width, x)),
+        y: Math.max(0, Math.min(rect.height, y)),
+        radius: 0.35 + Math.pow(nextRandom(), 3) * 1.75,
+        alpha: 0.18 + Math.pow(nextRandom(), 2) * 0.72,
+        depth,
+        phase: nextRandom() * Math.PI * 2,
+        color: warm ? "255, 214, 164" : cool ? "170, 205, 255" : "242, 247, 255",
+      };
+    });
+  };
+
+  const drawField = (time = 0) => {
+    const rect = canvas.getBoundingClientRect();
+    context.clearRect(0, 0, rect.width, rect.height);
+    context.fillStyle = "#030908";
+    context.fillRect(0, 0, rect.width, rect.height);
+
+    nebulas.forEach((nebula) => {
+      const gradient = context.createRadialGradient(nebula.x, nebula.y, 0, nebula.x, nebula.y, Math.max(nebula.rx, nebula.ry));
+      gradient.addColorStop(0, `hsla(${nebula.hue}, 68%, 58%, ${nebula.alpha})`);
+      gradient.addColorStop(0.42, `hsla(${nebula.hue}, 58%, 42%, ${nebula.alpha * 0.34})`);
+      gradient.addColorStop(1, "rgba(3, 9, 8, 0)");
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.ellipse(nebula.x, nebula.y, nebula.rx, nebula.ry, -0.28, 0, Math.PI * 2);
+      context.fill();
+    });
+
+    stars.forEach((star) => {
+      const twinkle = prefersReducedMotion ? 1 : 0.82 + Math.sin(time / (1400 + star.depth * 2200) + star.phase) * 0.18;
+      const alpha = star.alpha * twinkle;
+      context.fillStyle = `rgba(${star.color}, ${alpha})`;
+      context.beginPath();
+      context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      context.fill();
+
+      if (star.radius > 1.35) {
+        context.fillStyle = `rgba(${star.color}, ${alpha * 0.16})`;
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius * 3.2, 0, Math.PI * 2);
+        context.fill();
+      }
+    });
+
+    if (!prefersReducedMotion) animationFrame = requestAnimationFrame(drawField);
+  };
+
+  const refresh = () => {
+    cancelAnimationFrame(animationFrame);
+    buildField();
+    drawField();
+  };
+
+  refresh();
+  window.addEventListener("resize", refresh);
+};
+
 const setupSolarSystem = () => {
   const map = document.querySelector(".system-map");
   if (!map) return;
@@ -442,6 +550,7 @@ const setupSolarSystem = () => {
 
 setHeaderState();
 applyLanguage(currentLanguage);
+setupCosmosField();
 setupSolarSystem();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 langToggle?.addEventListener("click", () => {
