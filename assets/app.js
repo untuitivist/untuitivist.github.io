@@ -212,7 +212,7 @@ const setupSolarSystem = () => {
     {
       key: "macro",
       selector: ".macro-orbit",
-      orbitIndex: 1,
+      orbitIndex: 0.55,
       eccentricity: 0.22,
       tilt: 24,
       period: 26000,
@@ -325,9 +325,7 @@ const setupSolarSystem = () => {
       };
     }, { width: 0, height: 0 });
 
-    if (requiredSize.width > mapRect.width) {
-      map.style.width = `${Math.ceil(requiredSize.width)}px`;
-    }
+    map.style.width = `${Math.ceil(mapRect.width)}px`;
 
     if (requiredSize.height > mapRect.height) {
       map.style.minHeight = `${Math.ceil(requiredSize.height)}px`;
