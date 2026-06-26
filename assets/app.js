@@ -24,10 +24,13 @@ const copy = {
     mapTruth: "Truth",
     mapMicroScope: "physical signal",
     mapMicro: "Micro",
+    mapMicroIntro: "Truth inside physical signals and local sensor structures.",
     mapMacroScope: "embodied environment",
     mapMacro: "Macro",
+    mapMacroIntro: "Truth inside embodied scenes, bodies, robots, and motion.",
     mapSocialScope: "collective decision",
     mapSocial: "Social",
+    mapSocialIntro: "Truth inside markets, incentives, and collective decisions.",
     themeEyebrow: "Core theme",
     themeTitle: "Three layers of truth, grounded by agentic workflow.",
     zoneSignalTitle: "Micro",
@@ -98,10 +101,13 @@ const copy = {
     mapTruth: "\u771f\u5b9e",
     mapMicroScope: "\u7269\u7406\u4fe1\u53f7",
     mapMicro: "\u5fae\u89c2",
+    mapMicroIntro: "\u4ece\u7269\u7406\u4fe1\u53f7\u548c\u5c40\u90e8\u4f20\u611f\u7ed3\u6784\u4e2d\u63d0\u53d6\u771f\u5b9e\u3002",
     mapMacroScope: "\u5177\u8eab\u73af\u5883",
     mapMacro: "\u5b8f\u89c2",
+    mapMacroIntro: "\u5728\u573a\u666f\u3001\u8eab\u4f53\u3001\u673a\u5668\u4eba\u4e0e\u52a8\u4f5c\u4e2d\u5efa\u6a21\u771f\u5b9e\u3002",
     mapSocialScope: "\u96c6\u4f53\u51b3\u7b56",
     mapSocial: "\u793e\u4f1a",
+    mapSocialIntro: "\u5728\u5e02\u573a\u3001\u6fc0\u52b1\u548c\u96c6\u4f53\u51b3\u7b56\u4e2d\u53d1\u73b0\u771f\u5b9e\u3002",
     themeEyebrow: "\u6838\u5fc3\u4e3b\u7ebf",
     themeTitle: "\u4e09\u5c42\u771f\u5b9e\u4e16\u754c\uff0c\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
     zoneSignalTitle: "\u5fae\u89c2",
@@ -189,8 +195,57 @@ const applyLanguage = (language) => {
   currentLanguage = language;
 };
 
+const setupSolarCards = () => {
+  const map = document.querySelector(".system-map");
+  if (!map) return;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const hideCards = () => {
+    map.querySelectorAll(".planet-card").forEach((card) => card.classList.remove("is-visible"));
+    map.querySelectorAll(".orbit-track").forEach((track) => track.classList.remove("is-paused"));
+  };
+
+  const showCard = (planet) => {
+    const key = planet.getAttribute("data-planet");
+    const card = key ? map.querySelector(`[data-planet-card="${key}"]`) : null;
+    const track = planet.closest(".orbit-track");
+    if (!card) return;
+
+    hideCards();
+    track?.classList.add("is-paused");
+    card.classList.add("is-visible");
+
+    const mapRect = map.getBoundingClientRect();
+    const planetRect = planet.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const gap = 14;
+    let left = planetRect.right - mapRect.left + gap;
+    const maxLeft = mapRect.width - cardRect.width - 12;
+
+    if (left > maxLeft) left = planetRect.left - mapRect.left - cardRect.width - gap;
+    left = clamp(left, 12, Math.max(12, maxLeft));
+
+    const top = clamp(
+      planetRect.top - mapRect.top + planetRect.height / 2,
+      cardRect.height / 2 + 12,
+      mapRect.height - cardRect.height / 2 - 12
+    );
+
+    card.style.setProperty("--card-left", `${left}px`);
+    card.style.setProperty("--card-top", `${top}px`);
+  };
+
+  map.querySelectorAll(".map-planet").forEach((planet) => {
+    planet.addEventListener("pointerenter", () => showCard(planet));
+    planet.addEventListener("focus", () => showCard(planet));
+    planet.addEventListener("pointerleave", hideCards);
+    planet.addEventListener("blur", hideCards);
+  });
+};
+
 setHeaderState();
 applyLanguage(currentLanguage);
+setupSolarCards();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 langToggle?.addEventListener("click", () => {
   applyLanguage(currentLanguage === "zh" ? "en" : "zh");
