@@ -139,7 +139,7 @@ a {
   position: relative;
   min-height: calc(100vh - 68px);
   display: grid;
-  grid-template-columns: minmax(340px, 0.72fr) minmax(520px, 1.28fr);
+  grid-template-columns: minmax(300px, 0.72fr) minmax(260px, 1.28fr);
   gap: clamp(28px, 4vw, 64px);
   align-items: start;
   padding: clamp(44px, 7vw, 92px) clamp(18px, 5vw, 72px) clamp(38px, 6vw, 76px);
@@ -692,7 +692,7 @@ h1 {
   font-weight: 720;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 720px) {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
