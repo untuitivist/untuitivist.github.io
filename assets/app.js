@@ -522,6 +522,11 @@ const setupSolarSystem = () => {
     macro: "85, 158, 218",
     social: "238, 133, 80",
   };
+  const collisionRestitution = 0.92;
+  const collisionImpulseScale = 18;
+  const collisionDisplacementDamping = 0.965;
+  const collisionVelocityDamping = 0.975;
+  const collisionReturnStrength = 0.0009;
   let activePlanet = null;
   let orbitState = [];
   let lastFrame = performance.now();
@@ -542,6 +547,51 @@ const setupSolarSystem = () => {
     x: x * Math.cos(angle) - y * Math.sin(angle),
     y: x * Math.sin(angle) + y * Math.cos(angle),
   });
+
+  const getPlanetMass = (state) => Math.max(1, Math.PI * Math.pow(state.renderedRadius || state.radius || 1, 2));
+
+  const applyElasticCollision = (first, second) => {
+    const dx = second.position.x - first.position.x;
+    const dy = second.position.y - first.position.y;
+    const distance = Math.hypot(dx, dy) || 1;
+    const normal = { x: dx / distance, y: dy / distance };
+    const tangent = { x: -normal.y, y: normal.x };
+    const massFirst = getPlanetMass(first);
+    const massSecond = getPlanetMass(second);
+    const velocityFirst = first.motionVelocity || first.velocity || { x: 0, y: 0 };
+    const velocitySecond = second.motionVelocity || second.velocity || { x: 0, y: 0 };
+    const firstNormal = velocityFirst.x * normal.x + velocityFirst.y * normal.y;
+    const secondNormal = velocitySecond.x * normal.x + velocitySecond.y * normal.y;
+    const firstTangent = velocityFirst.x * tangent.x + velocityFirst.y * tangent.y;
+    const secondTangent = velocitySecond.x * tangent.x + velocitySecond.y * tangent.y;
+    const nextFirstNormal =
+      ((massFirst - collisionRestitution * massSecond) * firstNormal +
+        (1 + collisionRestitution) * massSecond * secondNormal) /
+      (massFirst + massSecond);
+    const nextSecondNormal =
+      ((massSecond - collisionRestitution * massFirst) * secondNormal +
+        (1 + collisionRestitution) * massFirst * firstNormal) /
+      (massFirst + massSecond);
+    const firstKick = {
+      x: (normal.x * nextFirstNormal + tangent.x * firstTangent - velocityFirst.x) * collisionImpulseScale,
+      y: (normal.y * nextFirstNormal + tangent.y * firstTangent - velocityFirst.y) * collisionImpulseScale,
+    };
+    const secondKick = {
+      x: (normal.x * nextSecondNormal + tangent.x * secondTangent - velocitySecond.x) * collisionImpulseScale,
+      y: (normal.y * nextSecondNormal + tangent.y * secondTangent - velocitySecond.y) * collisionImpulseScale,
+    };
+    const overlap = Math.max(0, first.renderedRadius + second.renderedRadius - distance);
+    const separation = overlap * 0.54 + 3;
+
+    first.impactVelocity.x += firstKick.x;
+    first.impactVelocity.y += firstKick.y;
+    second.impactVelocity.x += secondKick.x;
+    second.impactVelocity.y += secondKick.y;
+    first.impactOffset.x -= normal.x * separation * (massSecond / (massFirst + massSecond));
+    first.impactOffset.y -= normal.y * separation * (massSecond / (massFirst + massSecond));
+    second.impactOffset.x += normal.x * separation * (massFirst / (massFirst + massSecond));
+    second.impactOffset.y += normal.y * separation * (massFirst / (massFirst + massSecond));
+  };
 
   const hideCards = () => {
     map.querySelectorAll(".planet-card").forEach((card) => card.classList.remove("is-visible"));
@@ -574,6 +624,7 @@ const setupSolarSystem = () => {
 
     lastCollisionAt = now;
     lastCollisionPair = pair;
+    applyElasticCollision(first, second);
 
     const impact = {
       x: (first.position.x + second.position.x) / 2,
@@ -777,29 +828,54 @@ const setupSolarSystem = () => {
           position: { x: center.x, y: center.y },
           previousPosition: { x: center.x, y: center.y },
           velocity: { x: 0, y: 0 },
+          orbitalVelocity: { x: 0, y: 0 },
+          motionVelocity: { x: 0, y: 0 },
+          impactOffset: { x: 0, y: 0 },
+          impactVelocity: { x: 0, y: 0 },
           paused: false,
         };
       })
       .filter(Boolean);
   };
 
-  const positionPlanet = (state) => {
+  const positionPlanet = (state, delta = 0) => {
     const previous = state.position || { x: state.focus.x, y: state.focus.y };
     const eccentricAnomaly = solveKepler(state.meanAnomaly, state.eccentricity);
     const x = state.semiMajor * (Math.cos(eccentricAnomaly) - state.eccentricity);
     const y = state.semiMinor * Math.sin(eccentricAnomaly);
     const point = rotatePoint(x, y, state.tilt);
-    const position = {
+    const orbitPosition = {
       x: state.focus.x + point.x,
       y: state.focus.y + point.y,
+    };
+    const step = Math.min(delta || 16.67, 48);
+
+    state.impactVelocity.x -= state.impactOffset.x * collisionReturnStrength * step;
+    state.impactVelocity.y -= state.impactOffset.y * collisionReturnStrength * step;
+    state.impactOffset.x += state.impactVelocity.x * step * 0.06;
+    state.impactOffset.y += state.impactVelocity.y * step * 0.06;
+    state.impactVelocity.x *= Math.pow(collisionVelocityDamping, step / 16.67);
+    state.impactVelocity.y *= Math.pow(collisionVelocityDamping, step / 16.67);
+    state.impactOffset.x *= Math.pow(collisionDisplacementDamping, step / 16.67);
+    state.impactOffset.y *= Math.pow(collisionDisplacementDamping, step / 16.67);
+
+    const position = {
+      x: orbitPosition.x + state.impactOffset.x,
+      y: orbitPosition.y + state.impactOffset.y,
     };
 
     state.previousPosition = previous;
     state.position = position;
-    state.velocity = {
-      x: position.x - previous.x,
-      y: position.y - previous.y,
+    state.orbitalVelocity = {
+      x: orbitPosition.x - (state.previousOrbitPosition?.x || orbitPosition.x),
+      y: orbitPosition.y - (state.previousOrbitPosition?.y || orbitPosition.y),
     };
+    state.velocity = {
+      x: state.orbitalVelocity.x + state.impactVelocity.x,
+      y: state.orbitalVelocity.y + state.impactVelocity.y,
+    };
+    state.motionVelocity = state.velocity;
+    state.previousOrbitPosition = orbitPosition;
 
     state.packageNode.style.setProperty("--planet-x", `${position.x}px`);
     state.packageNode.style.setProperty("--planet-y", `${position.y}px`);
@@ -830,7 +906,7 @@ const setupSolarSystem = () => {
       if (!state.paused) {
         state.meanAnomaly = (state.meanAnomaly + (delta / state.period) * twoPi) % twoPi;
       }
-      positionPlanet(state);
+      positionPlanet(state, delta);
     });
     checkCollisions(now);
 
