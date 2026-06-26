@@ -15,8 +15,6 @@ const copy = {
     navTools: "Tools",
     navContact: "Contact",
     heroTitle: "Intelligence from Within",
-    heroLead:
-      "WIZ studies intelligence from within real systems: Micro Truth in physical signals, Macro Truth in embodied environments, and Social Truth in collective decision systems.",
     brandNote:
       "Concepts need intuition; intuition needs concepts. Knowledge becomes possible when the two are joined.",
     viewWork: "View selected work",
@@ -30,7 +28,8 @@ const copy = {
     mapSocial: "Social",
     mapSocialIntro: "Truth inside markets, incentives, and collective decisions.",
     themeEyebrow: "Core theme",
-    themeTitle: "Three layers of truth, grounded by agentic workflow.",
+    themeTitle:
+      "Built on agentic workflow, intelligence is generated from within real systems: finding Micro Truth in physical signals, modeling Macro Truth in embodied environments, and discovering Social Truth in collective decision systems.",
     zoneSignalTitle: "Micro",
     zoneSignalText:
       "Micro Truth focuses on local physical signals: the hidden structures inside sensors, machines, and small-scale physical processes.",
@@ -90,8 +89,6 @@ const copy = {
     navTools: "\u5de5\u5177",
     navContact: "\u8054\u7cfb",
     heroTitle: "Intelligence from Within",
-    heroLead:
-      "\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
     brandNote:
       "\u6982\u5ff5\u65e0\u76f4\u89c2\u5219\u7a7a\uff0c\u76f4\u89c2\u65e0\u6982\u5ff5\u5219\u76f2\uff1b\u4e24\u8005\u7ed3\u5408\uff0c\u77e5\u8bc6\u65b9\u5f97\u53ef\u80fd\u3002",
     viewWork: "\u67e5\u770b\u4ee3\u8868\u5de5\u4f5c",
@@ -105,7 +102,8 @@ const copy = {
     mapSocial: "\u793e\u4f1a",
     mapSocialIntro: "\u5728\u5e02\u573a\u3001\u6fc0\u52b1\u548c\u96c6\u4f53\u51b3\u7b56\u4e2d\u53d1\u73b0\u771f\u5b9e\u3002",
     themeEyebrow: "\u6838\u5fc3\u4e3b\u7ebf",
-    themeTitle: "\u4e09\u5c42\u771f\u5b9e\u4e16\u754c\uff0c\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
+    themeTitle:
+      "\u4ee5\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\uff0c\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
     zoneSignalTitle: "\u5fae\u89c2",
     zoneSignalText:
       "\u5fae\u89c2\u771f\u5b9e\u5173\u6ce8\u5c40\u90e8\u7269\u7406\u4fe1\u53f7\u4e2d\u7684\u771f\u5b9e\u7ed3\u6784\uff0c\u4f8b\u5982\u4f20\u611f\u5668\u3001\u673a\u68b0\u8bbe\u5907\u548c\u5c0f\u5c3a\u5ea6\u7269\u7406\u8fc7\u7a0b\u5185\u90e8\u7684\u6a21\u5f0f\u3001\u7ea6\u675f\u4e0e\u53d8\u5316\u3002",
