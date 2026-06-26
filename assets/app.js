@@ -524,9 +524,9 @@ const setupSolarSystem = () => {
   };
   const collisionRestitution = 0.38;
   const collisionImpulseScale = 12;
-  const collisionDisplacementDamping = 0.91;
-  const collisionVelocityDamping = 0.88;
-  const collisionReturnStrength = 0.0042;
+  const collisionDisplacementDamping = 0.989;
+  const collisionVelocityDamping = 0.955;
+  const collisionReturnStrength = 0.00042;
   const maxCollisionKick = 2.8;
   let activePlanet = null;
   let orbitState = [];
