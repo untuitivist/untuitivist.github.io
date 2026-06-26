@@ -136,13 +136,18 @@ a {
 }
 
 .hero {
+  --hero-content-width: 95vw;
+  --hero-gap: clamp(20px, 2.8vw, 48px);
   position: relative;
   min-height: calc(100vh - 68px);
   display: grid;
-  grid-template-columns: minmax(300px, 0.72fr) minmax(260px, 1.28fr);
-  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns:
+    minmax(0, calc((var(--hero-content-width) - var(--hero-gap)) * 0.4))
+    minmax(0, calc((var(--hero-content-width) - var(--hero-gap)) * 0.6));
+  gap: var(--hero-gap);
   align-items: center;
-  padding: clamp(44px, 7vw, 92px) clamp(18px, 5vw, 72px) clamp(38px, 6vw, 76px);
+  justify-content: center;
+  padding: clamp(44px, 7vw, 92px) 0 clamp(38px, 6vw, 76px);
   background:
     radial-gradient(circle at 72% 52%, rgba(245, 210, 123, 0.24) 0 92px, transparent 320px),
     radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px),
@@ -182,7 +187,8 @@ a {
 }
 
 .hero-copy {
-  max-width: 780px;
+  width: 100%;
+  max-width: none;
   min-width: 0;
   position: relative;
   z-index: 4;
@@ -198,7 +204,7 @@ a {
   --galaxy-scale: 1;
   position: relative;
   z-index: 2;
-  align-self: start;
+  align-self: center;
 }
 
 .eyebrow {
@@ -270,18 +276,17 @@ h1 {
 }
 
 .system-map {
-  position: relative;
-  width: min(100%, 880px);
-  min-height: 620px;
-  justify-self: end;
+  width: 100%;
+  min-height: clamp(560px, calc(100vh - 188px), 880px);
+  justify-self: stretch;
   margin: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   filter: drop-shadow(0 28px 64px rgba(0, 0, 0, 0.42));
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .system-map::before {
@@ -357,8 +362,8 @@ h1 {
 
 .truth-sun {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: var(--sun-x, 50%);
+  top: var(--sun-y, 50%);
   z-index: 3;
   width: calc(110px * var(--galaxy-scale));
   height: calc(110px * var(--galaxy-scale));
@@ -394,8 +399,8 @@ h1 {
 }
 
 .map-planet {
-  width: calc(44px * var(--galaxy-scale));
-  height: calc(44px * var(--galaxy-scale));
+  width: calc(var(--planet-size, 44px) * var(--galaxy-scale));
+  height: calc(var(--planet-size, 44px) * var(--galaxy-scale));
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
@@ -410,6 +415,25 @@ h1 {
   color: #74d7b0;
 }
 
+.map-planet::before,
+.map-planet::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.map-planet::before {
+  inset: 12%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.34), transparent 24%);
+  mix-blend-mode: screen;
+}
+
+.map-planet::after {
+  inset: 0;
+  box-shadow: inset -10px -12px 18px rgba(0, 0, 0, 0.35);
+}
+
 .map-planet:hover,
 .map-planet:focus-visible {
   outline: none;
@@ -420,21 +444,24 @@ h1 {
 
 .truth-icon {
   display: block;
-  width: calc(22px * var(--galaxy-scale));
-  height: calc(22px * var(--galaxy-scale));
+  width: calc(18px * var(--galaxy-scale));
+  height: calc(18px * var(--galaxy-scale));
   color: #f7fff9;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  opacity: 0.52;
+  mix-blend-mode: screen;
 }
 
 .map-planet.latent {
   color: var(--blue);
   background:
-    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.84), transparent 18px),
-    radial-gradient(circle, rgba(44, 93, 135, 0.96), rgba(11, 35, 61, 0.98));
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.9), transparent 16%),
+    radial-gradient(circle at 65% 64%, rgba(104, 166, 210, 0.32), transparent 30%),
+    linear-gradient(145deg, #7fa0b6 0%, #2c5d87 48%, #0b233d 100%);
   box-shadow:
     0 0 0 8px rgba(44, 93, 135, 0.16),
     0 0 38px rgba(85, 158, 218, 0.58);
@@ -443,11 +470,20 @@ h1 {
 .map-planet.action {
   color: var(--rust);
   background:
-    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.8), transparent 18px),
-    radial-gradient(circle, rgba(184, 93, 51, 0.98), rgba(70, 30, 18, 0.98));
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.82), transparent 15%),
+    repeating-linear-gradient(12deg, rgba(255, 193, 122, 0.18) 0 5px, rgba(96, 38, 23, 0) 5px 13px),
+    linear-gradient(145deg, #d78650 0%, #9b472b 46%, #461e12 100%);
   box-shadow:
     0 0 0 8px rgba(184, 93, 51, 0.16),
     0 0 38px rgba(238, 133, 80, 0.58);
+}
+
+.map-planet.real {
+  color: var(--green);
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.88), transparent 16%),
+    repeating-linear-gradient(-18deg, rgba(116, 215, 176, 0.2) 0 4px, rgba(8, 43, 34, 0) 4px 12px),
+    linear-gradient(145deg, #56c996 0%, #1f6f55 50%, #082b22 100%);
 }
 
 .embodied-icon,
