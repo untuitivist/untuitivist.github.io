@@ -375,21 +375,15 @@ const setupBigDipperEasterEgg = () => {
   const rotate = randomBetween(-28, 24);
 
   const points = [
-    { x: 24, y: 55, major: true },
-    { x: 45, y: 72, major: false },
-    { x: 70, y: 58, major: true },
-    { x: 58, y: 34, major: true },
-    { x: 88, y: 29, major: false },
-    { x: 114, y: 23, major: true },
-    { x: 139, y: 15, major: true },
+    { x: 27.5, y: 16.6, major: true },
+    { x: 19, y: 41.8, major: false },
+    { x: 52.5, y: 61.4, major: true },
+    { x: 68.3, y: 46.1, major: true },
+    { x: 94.4, y: 49.9, major: false },
+    { x: 115.8, y: 51.2, major: true },
+    { x: 141, y: 73.4, major: true },
   ];
-  const pointerFromMerak = points[1];
-  const pointerThroughDubhe = points[0];
-  const polarisDistanceRatio = 4.9;
-  const polaris = {
-    x: pointerThroughDubhe.x + (pointerThroughDubhe.x - pointerFromMerak.x) * polarisDistanceRatio,
-    y: pointerThroughDubhe.y + (pointerThroughDubhe.y - pointerFromMerak.y) * polarisDistanceRatio,
-  };
+  const polaris = { x: 69, y: -141.4 };
   const edges = [
     [0, 1],
     [1, 2],
@@ -409,7 +403,7 @@ const setupBigDipperEasterEgg = () => {
   const svgNamespace = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNamespace, "svg");
   svg.classList.add("big-dipper");
-  svg.setAttribute("viewBox", "-92 -42 252 132");
+  svg.setAttribute("viewBox", "-10 -156 180 250");
   svg.setAttribute("role", "img");
   svg.style.setProperty("--dipper-x", `${x}%`);
   svg.style.setProperty("--dipper-y", `${y}%`);
