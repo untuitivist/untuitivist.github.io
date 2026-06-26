@@ -195,26 +195,83 @@ const applyLanguage = (language) => {
   currentLanguage = language;
 };
 
-const setupSolarCards = () => {
+const setupSolarSystem = () => {
   const map = document.querySelector(".system-map");
   if (!map) return;
 
+  const orbitConfigs = [
+    {
+      key: "micro",
+      selector: ".micro-orbit",
+      majorRatio: 0.62,
+      eccentricity: 0.16,
+      tilt: -16,
+      period: 17000,
+      phase: 0.25,
+    },
+    {
+      key: "macro",
+      selector: ".macro-orbit",
+      majorRatio: 0.76,
+      eccentricity: 0.22,
+      tilt: 24,
+      period: 26000,
+      phase: 2.35,
+    },
+    {
+      key: "social",
+      selector: ".social-orbit",
+      majorRatio: 0.88,
+      eccentricity: 0.2,
+      tilt: -34,
+      period: 36000,
+      phase: 4.2,
+    },
+  ];
+
+  const twoPi = Math.PI * 2;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  let activePlanet = null;
+  let orbitState = [];
+  let lastFrame = performance.now();
+
+  const solveKepler = (meanAnomaly, eccentricity) => {
+    let eccentricAnomaly = meanAnomaly;
+    for (let index = 0; index < 5; index += 1) {
+      eccentricAnomaly -=
+        (eccentricAnomaly - eccentricity * Math.sin(eccentricAnomaly) - meanAnomaly) /
+        (1 - eccentricity * Math.cos(eccentricAnomaly));
+    }
+    return eccentricAnomaly;
+  };
+
+  const rotatePoint = (x, y, angle) => ({
+    x: x * Math.cos(angle) - y * Math.sin(angle),
+    y: x * Math.sin(angle) + y * Math.cos(angle),
+  });
+
   const hideCards = () => {
     map.querySelectorAll(".planet-card").forEach((card) => card.classList.remove("is-visible"));
     map.querySelectorAll(".orbit-track").forEach((track) => track.classList.remove("is-paused"));
+    activePlanet = null;
   };
 
   const showCard = (planet) => {
     const key = planet.getAttribute("data-planet");
     const card = key ? map.querySelector(`[data-planet-card="${key}"]`) : null;
-    const track = planet.closest(".orbit-track");
+    const state = orbitState.find((entry) => entry.key === key);
+    const track = state?.track;
     if (!card) return;
 
     hideCards();
+    activePlanet = planet;
     track?.classList.add("is-paused");
     card.classList.add("is-visible");
+    positionCard(planet, card);
+  };
 
+  const positionCard = (planet, card) => {
     const mapRect = map.getBoundingClientRect();
     const planetRect = planet.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
@@ -235,17 +292,119 @@ const setupSolarCards = () => {
     card.style.setProperty("--card-top", `${top}px`);
   };
 
+  const layoutOrbits = () => {
+    const mapRect = map.getBoundingClientRect();
+    const focus = {
+      x: mapRect.width / 2,
+      y: mapRect.height / 2,
+    };
+
+    orbitState = orbitConfigs
+      .map((config) => {
+        const track = map.querySelector(config.selector);
+        const planet = map.querySelector(`[data-planet="${config.key}"]`);
+        const packageNode = map.querySelector(`[data-planet-package="${config.key}"]`);
+        const card = map.querySelector(`[data-planet-card="${config.key}"]`);
+        if (!track || !planet || !packageNode || !card) return null;
+
+        const maxMajor = (mapRect.width * config.majorRatio) / 2;
+        const eccentricity = config.eccentricity;
+        const planetRadius = Math.max(planet.offsetWidth, planet.offsetHeight) / 2 || 38;
+        const sun = map.querySelector(".truth-sun");
+        const sunRadius = sun ? Math.max(sun.offsetWidth, sun.offsetHeight) / 2 : 66;
+        const outerLimit = Math.min(
+          (mapRect.width / 2 - planetRadius - 14) / (1 + eccentricity),
+          (mapRect.height / 2 - planetRadius - 14) / (1 + eccentricity)
+        );
+        const innerLimit = (sunRadius + planetRadius + 10) / (1 - eccentricity);
+        const minorScale = Math.sqrt(1 - eccentricity * eccentricity);
+        const desiredMajor = Math.min(maxMajor, outerLimit);
+        const semiMajor =
+          outerLimit >= innerLimit
+            ? clamp(desiredMajor, innerLimit, outerLimit)
+            : Math.max(48, outerLimit);
+        const semiMinor = semiMajor * minorScale;
+        const focusOffset = semiMajor * eccentricity;
+        const tilt = toRadians(config.tilt);
+        const centerOffset = rotatePoint(-focusOffset, 0, tilt);
+        const center = {
+          x: focus.x + centerOffset.x,
+          y: focus.y + centerOffset.y,
+        };
+
+        track.style.setProperty("--orbit-width", `${semiMajor * 2}px`);
+        track.style.setProperty("--orbit-height", `${semiMinor * 2}px`);
+        track.style.setProperty("--orbit-left", `${center.x}px`);
+        track.style.setProperty("--orbit-top", `${center.y}px`);
+        track.style.setProperty("--tilt", `${config.tilt}deg`);
+
+        return {
+          ...config,
+          track,
+          planet,
+          packageNode,
+          card,
+          focus,
+          semiMajor,
+          semiMinor,
+          tilt,
+          meanAnomaly: config.phase,
+          paused: false,
+        };
+      })
+      .filter(Boolean);
+  };
+
+  const positionPlanet = (state) => {
+    const eccentricAnomaly = solveKepler(state.meanAnomaly, state.eccentricity);
+    const x = state.semiMajor * (Math.cos(eccentricAnomaly) - state.eccentricity);
+    const y = state.semiMinor * Math.sin(eccentricAnomaly);
+    const point = rotatePoint(x, y, state.tilt);
+
+    state.packageNode.style.setProperty("--planet-x", `${state.focus.x + point.x}px`);
+    state.packageNode.style.setProperty("--planet-y", `${state.focus.y + point.y}px`);
+  };
+
+  const tick = (now) => {
+    const delta = now - lastFrame;
+    lastFrame = now;
+
+    orbitState.forEach((state) => {
+      state.paused = state.track.classList.contains("is-paused");
+      if (!state.paused) {
+        state.meanAnomaly = (state.meanAnomaly + (delta / state.period) * twoPi) % twoPi;
+      }
+      positionPlanet(state);
+    });
+
+    if (activePlanet) {
+      const key = activePlanet.getAttribute("data-planet");
+      const card = key ? map.querySelector(`[data-planet-card="${key}"]`) : null;
+      if (card?.classList.contains("is-visible")) positionCard(activePlanet, card);
+    }
+
+    requestAnimationFrame(tick);
+  };
+
   map.querySelectorAll(".map-planet").forEach((planet) => {
     planet.addEventListener("pointerenter", () => showCard(planet));
     planet.addEventListener("focus", () => showCard(planet));
     planet.addEventListener("pointerleave", hideCards);
     planet.addEventListener("blur", hideCards);
   });
+
+  layoutOrbits();
+  orbitState.forEach(positionPlanet);
+  requestAnimationFrame((now) => {
+    lastFrame = now;
+    requestAnimationFrame(tick);
+  });
+  window.addEventListener("resize", layoutOrbits);
 };
 
 setHeaderState();
 applyLanguage(currentLanguage);
-setupSolarCards();
+setupSolarSystem();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 langToggle?.addEventListener("click", () => {
   applyLanguage(currentLanguage === "zh" ? "en" : "zh");
