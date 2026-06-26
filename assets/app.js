@@ -332,8 +332,9 @@ const setupSolarSystem = () => {
     }
 
     const measuredMapRect = map.getBoundingClientRect();
+    const focusOffsetX = measuredMapRect.width > 520 ? measuredMapRect.width * 0.12 : 0;
     const focus = {
-      x: measuredMapRect.width / 2,
+      x: measuredMapRect.width / 2 + focusOffsetX,
       y: measuredMapRect.height / 2,
     };
 
