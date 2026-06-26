@@ -532,6 +532,11 @@ h1 {
   mix-blend-mode: screen;
 }
 
+.is-icon-hidden .truth-icon {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .sun-core-icon {
   width: var(--sun-icon-size, 42px);
   height: var(--sun-icon-size, 42px);

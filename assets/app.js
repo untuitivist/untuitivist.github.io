@@ -373,7 +373,13 @@ const setupSolarSystem = () => {
     macro: 6.5,
     social: 7.5,
   };
+  const iconRadiusThresholds = {
+    micro: 12,
+    macro: 13,
+    social: 15,
+  };
   const minSunRadius = 17;
+  const sunIconRadiusThreshold = 34;
   const collisionLayer = map.querySelector("[data-collision-layer]");
   const collisionCooldownMs = 9000;
   const planetColors = {
@@ -577,6 +583,7 @@ const setupSolarSystem = () => {
     const sunDiameter = Math.max(110 * galaxyScale, minSunRadius * 2);
     map.style.setProperty("--sun-size", `${sunDiameter}px`);
     map.style.setProperty("--sun-icon-size", `${Math.max(42 * galaxyScale, 26)}px`);
+    map.querySelector(".truth-sun")?.classList.toggle("is-icon-hidden", sunDiameter / 2 < sunIconRadiusThreshold);
 
     const measuredMapRect = map.getBoundingClientRect();
     const focus = {
@@ -616,6 +623,7 @@ const setupSolarSystem = () => {
         track.style.setProperty("--tilt", `${config.tilt}deg`);
         planet.style.setProperty("--planet-size", `${renderedDiameter}px`);
         planet.style.setProperty("--planet-icon-size", `${Math.max(renderedDiameter * 0.42, 13)}px`);
+        planet.classList.toggle("is-icon-hidden", renderedRadius < (iconRadiusThresholds[config.key] || 12));
 
         return {
           ...config,
