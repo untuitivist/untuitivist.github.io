@@ -203,9 +203,9 @@ const setupSolarSystem = () => {
     {
       key: "micro",
       selector: ".micro-orbit",
-      orbitScale: 1,
-      eccentricity: 0.18,
-      tilt: -16,
+      orbitScale: 1.15,
+      eccentricity: 0.58,
+      tilt: -6,
       period: 17000,
       phase: 0.25,
       radius: 18,
@@ -213,9 +213,9 @@ const setupSolarSystem = () => {
     {
       key: "macro",
       selector: ".macro-orbit",
-      orbitScale: 1.85,
-      eccentricity: 0.06,
-      tilt: 24,
+      orbitScale: 1.95,
+      eccentricity: 0.52,
+      tilt: 8,
       period: 43000,
       phase: 2.35,
       radius: 24,
@@ -223,9 +223,9 @@ const setupSolarSystem = () => {
     {
       key: "social",
       selector: ".social-orbit",
-      orbitScale: 3.25,
-      eccentricity: 0.1,
-      tilt: -34,
+      orbitScale: 3.45,
+      eccentricity: 0.62,
+      tilt: -4,
       period: 88000,
       phase: 4.2,
       radius: 31,
@@ -235,7 +235,7 @@ const setupSolarSystem = () => {
   const twoPi = Math.PI * 2;
   const basePlanetRadius = Math.max(...orbitConfigs.map((config) => config.radius));
   const baseSunRadius = 55;
-  const baseInnerSemiMajor = 116;
+  const baseInnerSemiMajor = 142;
   const orbitPadding = 18;
   const designBoundsSafety = 1.08;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -307,7 +307,7 @@ const setupSolarSystem = () => {
 
     const designOrbits = orbitConfigs.map((config) => {
       const eccentricity = config.eccentricity;
-      const innerLimit = (baseSunRadius + basePlanetRadius + 10) / (1 - eccentricity);
+      const innerLimit = (baseSunRadius + config.radius + 12) / (1 - eccentricity);
       const semiMajor = Math.max(innerLimit, baseInnerSemiMajor * config.orbitScale);
       const semiMinor = semiMajor * Math.sqrt(1 - eccentricity * eccentricity);
       const tilt = toRadians(config.tilt);
