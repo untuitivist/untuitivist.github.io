@@ -412,12 +412,23 @@ h1 {
   mix-blend-mode: screen;
 }
 
-.truth-sun strong {
+.truth-core-icon {
   position: relative;
   z-index: 2;
-  color: #17211b;
-  font-size: calc(23px * var(--galaxy-scale));
-  letter-spacing: 0;
+  width: calc(48px * var(--galaxy-scale));
+  height: calc(48px * var(--galaxy-scale));
+  fill: none;
+  stroke: rgba(18, 31, 24, 0.9);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 5px rgba(255, 245, 198, 0.42));
+}
+
+.truth-core-icon circle {
+  fill: rgba(18, 31, 24, 0.88);
+  stroke: rgba(255, 246, 206, 0.52);
+  stroke-width: 1.4;
 }
 
 .planet-package {
