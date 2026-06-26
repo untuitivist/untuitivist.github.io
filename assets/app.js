@@ -18,6 +18,7 @@ const copy = {
     brandNote:
       "Concepts need intuition; intuition needs concepts. Knowledge becomes possible when the two are joined.",
     viewWork: "View selected work",
+    googleScholar: "Google Scholar",
     mapMicroScope: "physical signal",
     mapMicro: "Micro",
     mapMicroIntro: "Truth inside physical signals and local sensor structures.",
@@ -95,6 +96,7 @@ const copy = {
     brandNote:
       "\u6982\u5ff5\u65e0\u76f4\u89c2\u5219\u7a7a\uff0c\u76f4\u89c2\u65e0\u6982\u5ff5\u5219\u76f2\uff1b\u4e24\u8005\u7ed3\u5408\uff0c\u77e5\u8bc6\u65b9\u5f97\u53ef\u80fd\u3002",
     viewWork: "\u67e5\u770b\u4ee3\u8868\u5de5\u4f5c",
+    googleScholar: "\u8c37\u6b4c\u5b66\u672f",
     mapMicroScope: "\u7269\u7406\u4fe1\u53f7",
     mapMicro: "\u5fae\u89c2",
     mapMicroIntro: "\u4ece\u7269\u7406\u4fe1\u53f7\u548c\u5c40\u90e8\u4f20\u611f\u7ed3\u6784\u4e2d\u63d0\u53d6\u771f\u5b9e\u3002",
@@ -366,9 +368,18 @@ const setupSolarSystem = () => {
   const orbitPadding = 18;
   const designBoundsSafety = 1.02;
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  const collisionLayer = map.querySelector("[data-collision-layer]");
+  const collisionCooldownMs = 9000;
+  const planetColors = {
+    micro: "116, 215, 176",
+    macro: "85, 158, 218",
+    social: "238, 133, 80",
+  };
   let activePlanet = null;
   let orbitState = [];
   let lastFrame = performance.now();
+  let lastCollisionAt = 0;
+  let lastCollisionPair = "";
 
   const solveKepler = (meanAnomaly, eccentricity) => {
     let eccentricAnomaly = meanAnomaly;
@@ -389,6 +400,94 @@ const setupSolarSystem = () => {
     map.querySelectorAll(".planet-card").forEach((card) => card.classList.remove("is-visible"));
     map.querySelectorAll(".orbit-track").forEach((track) => track.classList.remove("is-paused"));
     activePlanet = null;
+  };
+
+  const makeDebris = (x, y, dx, dy, size, life, spin, color) => {
+    if (!collisionLayer) return;
+    const fragment = document.createElement("span");
+    fragment.className = "debris-fragment";
+    fragment.style.setProperty("--x", `${x}px`);
+    fragment.style.setProperty("--y", `${y}px`);
+    fragment.style.setProperty("--dx", `${dx}px`);
+    fragment.style.setProperty("--dy", `${dy}px`);
+    fragment.style.setProperty("--size", `${size}px`);
+    fragment.style.setProperty("--life", `${life}ms`);
+    fragment.style.setProperty("--spin", `${spin}deg`);
+    fragment.style.setProperty("--end-scale", (0.36 + Math.random() * 0.9).toFixed(2));
+    fragment.style.setProperty("--debris-rgb", color);
+    fragment.addEventListener("animationend", () => fragment.remove(), { once: true });
+    collisionLayer.appendChild(fragment);
+  };
+
+  const triggerCollision = (first, second, now) => {
+    if (!collisionLayer) return;
+
+    const pair = [first.key, second.key].sort().join("-");
+    if (now - lastCollisionAt < collisionCooldownMs && pair === lastCollisionPair) return;
+
+    lastCollisionAt = now;
+    lastCollisionPair = pair;
+
+    const impact = {
+      x: (first.position.x + second.position.x) / 2,
+      y: (first.position.y + second.position.y) / 2,
+    };
+    const relativeVelocity = {
+      x: (first.velocity?.x || 0) - (second.velocity?.x || 0),
+      y: (first.velocity?.y || 0) - (second.velocity?.y || 0),
+    };
+    const relativeSpeed = Math.hypot(relativeVelocity.x, relativeVelocity.y) || 0.12;
+    const tangent = {
+      x: relativeVelocity.x / relativeSpeed,
+      y: relativeVelocity.y / relativeSpeed,
+    };
+    const normal = {
+      x: -(second.position.y - first.position.y),
+      y: second.position.x - first.position.x,
+    };
+    const normalLength = Math.hypot(normal.x, normal.y) || 1;
+    normal.x /= normalLength;
+    normal.y /= normalLength;
+
+    const flash = document.createElement("span");
+    flash.className = "collision-flash";
+    flash.style.setProperty("--x", `${impact.x}px`);
+    flash.style.setProperty("--y", `${impact.y}px`);
+    flash.style.setProperty("--size", `${Math.max(first.radius, second.radius) * 5 * (first.galaxyScale || 1)}px`);
+    flash.style.setProperty("--life", "840ms");
+    flash.style.setProperty("--flash-rgb", planetColors[second.key] || planetColors[first.key]);
+    flash.addEventListener("animationend", () => flash.remove(), { once: true });
+    collisionLayer.appendChild(flash);
+
+    [first.planet, second.planet].forEach((planet) => {
+      planet.classList.remove("is-colliding");
+      void planet.offsetWidth;
+      planet.classList.add("is-colliding");
+      window.setTimeout(() => planet.classList.remove("is-colliding"), 760);
+    });
+
+    const fragments = 24;
+    for (let index = 0; index < fragments; index += 1) {
+      const side = index % 2 === 0 ? 1 : -1;
+      const spread = (Math.random() - 0.5) * 1.4;
+      const speed = 36 + Math.random() * 118 + Math.min(relativeSpeed * 220, 96);
+      const direction = {
+        x: tangent.x * side + normal.x * spread,
+        y: tangent.y * side + normal.y * spread,
+      };
+      const length = Math.hypot(direction.x, direction.y) || 1;
+      const color = Math.random() > 0.5 ? planetColors[first.key] : planetColors[second.key];
+      makeDebris(
+        impact.x + (Math.random() - 0.5) * 10,
+        impact.y + (Math.random() - 0.5) * 10,
+        (direction.x / length) * speed,
+        (direction.y / length) * speed,
+        2 + Math.random() * 5,
+        2400 + Math.random() * 2200,
+        (Math.random() > 0.5 ? 1 : -1) * (120 + Math.random() * 540),
+        color
+      );
+    }
   };
 
   const showCard = (planet) => {
@@ -517,6 +616,10 @@ const setupSolarSystem = () => {
           tilt,
           eccentricity: designOrbit.eccentricity,
           meanAnomaly: config.phase,
+          galaxyScale,
+          position: { x: center.x, y: center.y },
+          previousPosition: { x: center.x, y: center.y },
+          velocity: { x: 0, y: 0 },
           paused: false,
         };
       })
@@ -524,13 +627,41 @@ const setupSolarSystem = () => {
   };
 
   const positionPlanet = (state) => {
+    const previous = state.position || { x: state.focus.x, y: state.focus.y };
     const eccentricAnomaly = solveKepler(state.meanAnomaly, state.eccentricity);
     const x = state.semiMajor * (Math.cos(eccentricAnomaly) - state.eccentricity);
     const y = state.semiMinor * Math.sin(eccentricAnomaly);
     const point = rotatePoint(x, y, state.tilt);
+    const position = {
+      x: state.focus.x + point.x,
+      y: state.focus.y + point.y,
+    };
 
-    state.packageNode.style.setProperty("--planet-x", `${state.focus.x + point.x}px`);
-    state.packageNode.style.setProperty("--planet-y", `${state.focus.y + point.y}px`);
+    state.previousPosition = previous;
+    state.position = position;
+    state.velocity = {
+      x: position.x - previous.x,
+      y: position.y - previous.y,
+    };
+
+    state.packageNode.style.setProperty("--planet-x", `${position.x}px`);
+    state.packageNode.style.setProperty("--planet-y", `${position.y}px`);
+  };
+
+  const checkCollisions = (now) => {
+    if (!collisionLayer || orbitState.length < 2) return;
+    for (let firstIndex = 0; firstIndex < orbitState.length - 1; firstIndex += 1) {
+      for (let secondIndex = firstIndex + 1; secondIndex < orbitState.length; secondIndex += 1) {
+        const first = orbitState[firstIndex];
+        const second = orbitState[secondIndex];
+        const distance = Math.hypot(first.position.x - second.position.x, first.position.y - second.position.y);
+        const threshold = (first.radius + second.radius) * (first.galaxyScale || 1) * 0.88;
+        if (distance <= threshold) {
+          triggerCollision(first, second, now);
+          return;
+        }
+      }
+    }
   };
 
   const tick = (now) => {
@@ -544,6 +675,7 @@ const setupSolarSystem = () => {
       }
       positionPlanet(state);
     });
+    checkCollisions(now);
 
     if (activePlanet) {
       const key = activePlanet.getAttribute("data-planet");
