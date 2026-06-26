@@ -296,10 +296,7 @@ h1 {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background:
-    radial-gradient(ellipse at 62% 54%, rgba(245, 210, 123, 0.12), transparent 34%),
-    radial-gradient(ellipse at 44% 48%, rgba(85, 158, 218, 0.08), transparent 38%);
-  opacity: 0.9;
+  background: transparent;
   pointer-events: none;
 }
 
@@ -387,30 +384,30 @@ h1 {
 }
 
 .truth-sun::before {
-  inset: -210%;
+  inset: -92%;
   z-index: -1;
   background:
     radial-gradient(
       circle,
-      rgba(245, 210, 123, 0.34) 0%,
-      rgba(245, 177, 74, 0.24) 22%,
-      rgba(184, 93, 51, 0.12) 44%,
-      rgba(184, 93, 51, 0.045) 64%,
-      transparent 82%
+      rgba(255, 235, 158, 0.32) 0%,
+      rgba(245, 177, 74, 0.22) 26%,
+      rgba(184, 93, 51, 0.12) 48%,
+      rgba(184, 93, 51, 0.035) 66%,
+      transparent 78%
     );
-  filter: blur(2px);
+  filter: blur(1px);
   mix-blend-mode: screen;
 }
 
 .truth-sun::after {
-  inset: -58%;
+  inset: -36%;
   z-index: -1;
   background:
     radial-gradient(
       circle,
-      rgba(255, 226, 142, 0.22) 0%,
-      rgba(245, 177, 74, 0.1) 44%,
-      transparent 72%
+      rgba(255, 232, 142, 0.28) 0%,
+      rgba(245, 177, 74, 0.14) 44%,
+      transparent 74%
     );
   mix-blend-mode: screen;
 }
@@ -864,7 +861,7 @@ h1 {
 
   .truth-sun {
     box-shadow:
-      0 0 0 12px rgba(222, 169, 83, 0.12),
+      inset -10px -12px 18px rgba(74, 28, 14, 0.22),
       0 18px 34px rgba(111, 65, 31, 0.18);
   }
 
