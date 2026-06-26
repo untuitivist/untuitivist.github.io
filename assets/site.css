@@ -372,13 +372,52 @@ h1 {
     radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.82), transparent 28%),
     radial-gradient(circle at 48% 52%, #ffe38e 0%, #e5a64e 42%, #9e4e2a 72%, #3c160e 100%);
   box-shadow:
-    0 0 0 18px rgba(222, 169, 83, 0.08),
-    0 0 62px rgba(245, 210, 123, 0.56),
-    0 0 150px rgba(184, 93, 51, 0.32);
+    inset -14px -16px 24px rgba(74, 28, 14, 0.24),
+    0 0 18px rgba(245, 210, 123, 0.36);
   transform: translate(-50%, -50%);
+  isolation: isolate;
+}
+
+.truth-sun::before,
+.truth-sun::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.truth-sun::before {
+  inset: -210%;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle,
+      rgba(245, 210, 123, 0.34) 0%,
+      rgba(245, 177, 74, 0.24) 22%,
+      rgba(184, 93, 51, 0.12) 44%,
+      rgba(184, 93, 51, 0.045) 64%,
+      transparent 82%
+    );
+  filter: blur(2px);
+  mix-blend-mode: screen;
+}
+
+.truth-sun::after {
+  inset: -58%;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 226, 142, 0.22) 0%,
+      rgba(245, 177, 74, 0.1) 44%,
+      transparent 72%
+    );
+  mix-blend-mode: screen;
 }
 
 .truth-sun strong {
+  position: relative;
+  z-index: 2;
   color: #17211b;
   font-size: calc(23px * var(--galaxy-scale));
   letter-spacing: 0;
@@ -396,6 +435,8 @@ h1 {
 }
 
 .map-planet {
+  --planet-glow-rgb: 116, 215, 176;
+  position: relative;
   width: calc(var(--planet-size, 44px) * var(--galaxy-scale));
   height: calc(var(--planet-size, 44px) * var(--galaxy-scale));
   display: grid;
@@ -408,9 +449,10 @@ h1 {
     radial-gradient(circle at 62% 70%, rgba(0, 0, 0, 0.42), transparent 48%),
     radial-gradient(circle, rgba(31, 111, 85, 0.96), rgba(8, 43, 34, 0.98));
   box-shadow:
-    0 0 0 6px rgba(31, 111, 85, 0.12),
-    0 0 28px rgba(31, 111, 85, 0.5);
+    inset -10px -12px 20px rgba(0, 0, 0, 0.22),
+    0 0 10px rgba(var(--planet-glow-rgb), 0.22);
   color: #74d7b0;
+  isolation: isolate;
 }
 
 .map-planet::before,
@@ -422,16 +464,26 @@ h1 {
 }
 
 .map-planet::before {
-  inset: 0;
+  inset: -165%;
+  z-index: -1;
   background:
-    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.38), transparent 20%),
-    linear-gradient(115deg, transparent 0 48%, rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.4) 100%);
+    radial-gradient(
+      circle,
+      rgba(var(--planet-glow-rgb), 0.38) 0%,
+      rgba(var(--planet-glow-rgb), 0.22) 24%,
+      rgba(var(--planet-glow-rgb), 0.1) 46%,
+      rgba(var(--planet-glow-rgb), 0.035) 62%,
+      transparent 78%
+    );
   mix-blend-mode: screen;
+  filter: blur(1px);
 }
 
 .map-planet::after {
   inset: 0;
+  z-index: 1;
   background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.32), transparent 18%),
     radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.46), transparent 48%),
     linear-gradient(125deg, transparent 0 42%, rgba(0, 0, 0, 0.24) 100%);
   box-shadow: inset -12px -14px 20px rgba(0, 0, 0, 0.38);
@@ -441,11 +493,14 @@ h1 {
 .map-planet:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 10px rgba(255, 255, 255, 0.1),
-    0 0 46px currentColor;
+    inset -10px -12px 20px rgba(0, 0, 0, 0.2),
+    0 0 12px rgba(var(--planet-glow-rgb), 0.34),
+    0 0 44px rgba(var(--planet-glow-rgb), 0.36);
 }
 
 .truth-icon {
+  position: relative;
+  z-index: 2;
   display: block;
   width: calc(18px * var(--galaxy-scale));
   height: calc(18px * var(--galaxy-scale));
@@ -460,6 +515,7 @@ h1 {
 }
 
 .map-planet.latent {
+  --planet-glow-rgb: 85, 158, 218;
   color: var(--blue);
   background:
     radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.82), transparent 15%),
@@ -467,11 +523,12 @@ h1 {
     repeating-linear-gradient(18deg, rgba(220, 244, 255, 0.12) 0 4px, rgba(13, 45, 74, 0) 4px 14px),
     linear-gradient(145deg, #8db3c6 0%, #2c5d87 45%, #0b233d 100%);
   box-shadow:
-    0 0 0 8px rgba(44, 93, 135, 0.16),
-    0 0 38px rgba(85, 158, 218, 0.58);
+    inset -10px -12px 20px rgba(0, 0, 0, 0.22),
+    0 0 10px rgba(85, 158, 218, 0.24);
 }
 
 .map-planet.action {
+  --planet-glow-rgb: 238, 133, 80;
   color: var(--rust);
   background:
     radial-gradient(circle at 28% 22%, rgba(255, 236, 196, 0.78), transparent 14%),
@@ -479,11 +536,12 @@ h1 {
     repeating-linear-gradient(10deg, rgba(255, 193, 122, 0.22) 0 5px, rgba(96, 38, 23, 0.08) 5px 13px),
     linear-gradient(145deg, #d78650 0%, #9b472b 46%, #461e12 100%);
   box-shadow:
-    0 0 0 8px rgba(184, 93, 51, 0.16),
-    0 0 38px rgba(238, 133, 80, 0.58);
+    inset -10px -12px 20px rgba(0, 0, 0, 0.22),
+    0 0 10px rgba(238, 133, 80, 0.24);
 }
 
 .map-planet.real {
+  --planet-glow-rgb: 116, 215, 176;
   color: var(--green);
   background:
     radial-gradient(circle at 28% 22%, rgba(229, 255, 243, 0.82), transparent 15%),

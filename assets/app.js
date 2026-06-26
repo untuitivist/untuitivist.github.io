@@ -210,7 +210,14 @@ const setupCosmosField = () => {
       return value / 4294967296;
     };
   };
+  const createSessionSeed = () => {
+    const cryptoValues = new Uint32Array(1);
+    window.crypto?.getRandomValues?.(cryptoValues);
+    return cryptoValues[0] || Math.floor(Math.random() * 4294967296);
+  };
 
+  const sessionSeed = createSessionSeed();
+  canvas.dataset.cosmosSeed = String(sessionSeed);
   let stars = [];
   let nebulas = [];
   let animationFrame = 0;
@@ -222,7 +229,8 @@ const setupCosmosField = () => {
     canvas.height = Math.max(1, Math.floor(rect.height * dpr));
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const nextRandom = random(Math.floor(rect.width * 31 + rect.height * 17 + 20260626));
+    const sizeSeed = Math.floor(rect.width * 31 + rect.height * 17);
+    const nextRandom = random((sessionSeed + sizeSeed) >>> 0);
     const area = rect.width * rect.height;
     const starCount = Math.min(900, Math.max(260, Math.floor(area / 2100)));
 
@@ -255,6 +263,11 @@ const setupCosmosField = () => {
         color: warm ? "255, 214, 164" : cool ? "170, 205, 255" : "242, 247, 255",
       };
     });
+
+    canvas.dataset.cosmosSignature = stars
+      .slice(0, 8)
+      .map((star) => `${Math.round(star.x)}:${Math.round(star.y)}:${star.radius.toFixed(2)}`)
+      .join("|");
   };
 
   const drawField = (time = 0) => {
