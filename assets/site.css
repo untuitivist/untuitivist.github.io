@@ -204,6 +204,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
+    radial-gradient(circle at 50% 50%, rgba(222, 169, 83, 0.2) 0 92px, transparent 93px),
     linear-gradient(90deg, rgba(31, 111, 85, 0.08) 1px, transparent 1px),
     linear-gradient(rgba(44, 93, 135, 0.08) 1px, transparent 1px),
     #fbfaf6;
@@ -212,38 +213,61 @@ h1 {
   overflow: hidden;
 }
 
-.truth-ring {
+.solar-orbit {
   position: absolute;
+  left: 50%;
+  top: 50%;
   border: 1px solid transparent;
   border-radius: 50%;
   pointer-events: none;
+  transform-origin: center;
 }
 
-.micro-ring {
-  left: 58px;
-  top: 82px;
-  width: 68%;
-  height: 54%;
+.micro-orbit {
+  width: 70%;
+  height: 42%;
   border-color: rgba(31, 111, 85, 0.3);
-  transform: rotate(-14deg);
+  transform: translate(-50%, -50%) rotate(-16deg);
 }
 
-.macro-ring {
-  right: 42px;
-  top: 104px;
-  width: 62%;
-  height: 52%;
+.macro-orbit {
+  width: 54%;
+  height: 68%;
   border-color: rgba(44, 93, 135, 0.3);
-  transform: rotate(18deg);
+  transform: translate(-50%, -50%) rotate(23deg);
 }
 
-.social-ring {
-  left: 82px;
-  bottom: 86px;
-  width: 60%;
-  height: 44%;
+.social-orbit {
+  width: 78%;
+  height: 62%;
   border-color: rgba(184, 93, 51, 0.28);
-  transform: rotate(34deg);
+  transform: translate(-50%, -50%) rotate(-38deg);
+}
+
+.truth-sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(184, 93, 51, 0.34);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.82), transparent 28%),
+    radial-gradient(circle, #f5d27b 0%, #dfa857 54%, #b85d33 100%);
+  box-shadow:
+    0 0 0 18px rgba(222, 169, 83, 0.12),
+    0 22px 44px rgba(111, 65, 31, 0.2);
+  transform: translate(-50%, -50%);
+}
+
+.truth-sun strong {
+  color: #17211b;
+  font-size: 23px;
+  letter-spacing: 0;
 }
 
 .map-node {
@@ -256,8 +280,13 @@ h1 {
 }
 
 .map-node {
-  width: 148px;
-  padding: 16px;
+  width: 136px;
+  min-height: 136px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 50%;
 }
 
 .truth-icon {
@@ -296,19 +325,19 @@ h1 {
 }
 
 .map-node.real {
-  top: 56px;
-  left: 36px;
+  top: 24px;
+  left: 34px;
   border-top: 5px solid var(--green);
 }
 
 .map-node.latent {
-  top: 182px;
-  right: 42px;
+  top: 24px;
+  right: 30px;
   border-top: 5px solid var(--blue);
 }
 
 .map-node.action {
-  bottom: 58px;
+  bottom: 24px;
   left: 84px;
   border-top: 5px solid var(--rust);
 }
@@ -545,25 +574,55 @@ h1 {
   }
 
   .system-map {
-    min-height: 380px;
+    min-height: 430px;
+  }
+
+  .truth-sun {
+    width: 104px;
+    height: 104px;
+    box-shadow:
+      0 0 0 12px rgba(222, 169, 83, 0.12),
+      0 18px 34px rgba(111, 65, 31, 0.18);
+  }
+
+  .truth-sun strong {
+    font-size: 18px;
   }
 
   .map-node {
-    width: 132px;
+    width: 118px;
+    min-height: 118px;
+    padding: 12px;
+  }
+
+  .truth-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+  }
+
+  .map-node span {
+    font-size: 10px;
+  }
+
+  .map-node strong {
+    font-size: 18px;
   }
 
   .map-node.real {
     left: 18px;
+    top: 22px;
   }
 
   .map-node.latent {
     right: 18px;
-    top: 72px;
+    top: 22px;
   }
 
   .map-node.action {
-    left: 28px;
-    bottom: 18px;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
   }
 
   .tool-list article,
