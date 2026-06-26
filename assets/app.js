@@ -383,8 +383,8 @@ const setupBigDipperEasterEgg = () => {
   const flashDuration = 720;
   const lineDuration = 720;
   const lineBaseDelay = flashDelay + flashDuration + 160;
-  const lineStagger = 300;
-  const connectDelays = points.map(() => lineBaseDelay);
+  const lineStagger = lineDuration;
+  const connectDelays = points.map(() => Number.POSITIVE_INFINITY);
   const svgNamespace = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNamespace, "svg");
   svg.classList.add("big-dipper");
@@ -421,7 +421,7 @@ const setupBigDipperEasterEgg = () => {
     star.setAttribute("cy", String(point.y));
     star.setAttribute("r", point.major ? "2.2" : "1.75");
     star.style.setProperty("--flash-delay", `${flashDelay}ms`);
-    star.style.setProperty("--connect-delay", `${connectDelays[index]}ms`);
+    star.style.setProperty("--connect-delay", `${Number.isFinite(connectDelays[index]) ? connectDelays[index] : lineBaseDelay}ms`);
     svg.append(star);
   });
 
