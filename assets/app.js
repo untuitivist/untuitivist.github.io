@@ -307,46 +307,51 @@ const setupSolarSystem = () => {
   const map = document.querySelector(".system-map");
   if (!map) return;
 
+  const twoPi = Math.PI * 2;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const randomBetween = (min, max) => min + Math.random() * (max - min);
+  const randomSigned = (range) => randomBetween(-range, range);
+  const baseAxisAngle = randomBetween(0, 360);
+  const firstAxisGap = randomBetween(100, 140);
+  const secondAxisGap = randomBetween(Math.max(100, 220 - firstAxisGap), Math.min(140, 260 - firstAxisGap));
+  const axisAngles = [baseAxisAngle, baseAxisAngle + firstAxisGap, baseAxisAngle + firstAxisGap + secondAxisGap];
+  const axisRatios = [0.25, 0.5, 0.75].map((ratio) => clamp(ratio + randomSigned(0.05), ratio - 0.05, ratio + 0.05));
+
   const orbitConfigs = [
     {
       key: "micro",
       selector: ".micro-orbit",
-      orbitScale: 1,
-      eccentricity: 0.18,
-      tilt: -16,
+      axisRatio: axisRatios[0],
+      aspectRatio: randomBetween(0.82, 0.9),
+      tilt: axisAngles[0],
       period: 17000,
-      phase: 0.25,
+      phase: randomBetween(0, twoPi),
       radius: 18,
     },
     {
       key: "macro",
       selector: ".macro-orbit",
-      orbitScale: 1.85,
-      eccentricity: 0.06,
-      tilt: 24,
+      axisRatio: axisRatios[1],
+      aspectRatio: randomBetween(0.82, 0.9),
+      tilt: axisAngles[1],
       period: 43000,
-      phase: 2.35,
+      phase: randomBetween(0, twoPi),
       radius: 24,
     },
     {
       key: "social",
       selector: ".social-orbit",
-      orbitScale: 3.25,
-      eccentricity: 0.1,
-      tilt: -34,
+      axisRatio: axisRatios[2],
+      aspectRatio: randomBetween(0.82, 0.9),
+      tilt: axisAngles[2],
       period: 88000,
-      phase: 4.2,
+      phase: randomBetween(0, twoPi),
       radius: 31,
     },
   ];
 
-  const twoPi = Math.PI * 2;
-  const basePlanetRadius = Math.max(...orbitConfigs.map((config) => config.radius));
-  const baseSunRadius = 55;
-  const baseInnerSemiMajor = 116;
   const orbitPadding = 18;
-  const designBoundsSafety = 1.08;
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const designBoundsSafety = 1.02;
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
   let activePlanet = null;
   let orbitState = [];
@@ -412,13 +417,15 @@ const setupSolarSystem = () => {
     map.style.setProperty("--galaxy-scale", "1");
     map.style.minHeight = "";
     const mapRect = map.getBoundingClientRect();
+    const maxSemiMajor = Math.max(Math.min(mapRect.width, mapRect.height) * 0.68, 720);
 
     const designOrbits = orbitConfigs.map((config) => {
-      const eccentricity = config.eccentricity;
-      const innerLimit = (baseSunRadius + basePlanetRadius + 10) / (1 - eccentricity);
-      const semiMajor = Math.max(innerLimit, baseInnerSemiMajor * config.orbitScale);
-      const semiMinor = semiMajor * Math.sqrt(1 - eccentricity * eccentricity);
+      const eccentricity = Math.sqrt(1 - config.aspectRatio * config.aspectRatio);
+      const semiMajor = maxSemiMajor * config.axisRatio;
+      const semiMinor = semiMajor * config.aspectRatio;
       const tilt = toRadians(config.tilt);
+      const focusOffset = semiMajor * eccentricity;
+      const centerOffset = rotatePoint(-focusOffset, 0, tilt);
       const yExtent = Math.sqrt(
         Math.pow(semiMajor * Math.sin(tilt), 2) + Math.pow(semiMinor * Math.cos(tilt), 2)
       );
@@ -427,29 +434,35 @@ const setupSolarSystem = () => {
       );
       return {
         ...config,
+        eccentricity,
         semiMajor,
         semiMinor,
+        centerOffset,
         xExtent,
         yExtent,
+        minX: centerOffset.x - xExtent - config.radius - orbitPadding,
+        maxX: centerOffset.x + xExtent + config.radius + orbitPadding,
+        minY: centerOffset.y - yExtent - config.radius - orbitPadding,
+        maxY: centerOffset.y + yExtent + config.radius + orbitPadding,
       };
     });
 
     const requiredSize = designOrbits.reduce((size, orbit) => {
       return {
-        width: Math.max(size.width, (orbit.xExtent + basePlanetRadius + orbitPadding) * 2 * designBoundsSafety),
-        height: Math.max(size.height, (orbit.yExtent + basePlanetRadius + orbitPadding) * 2 * designBoundsSafety),
+        width: Math.max(size.width, Math.max(Math.abs(orbit.minX), Math.abs(orbit.maxX)) * 2 * designBoundsSafety),
+        height: Math.max(size.height, Math.max(Math.abs(orbit.minY), Math.abs(orbit.maxY)) * 2 * designBoundsSafety),
       };
     }, { width: 0, height: 0 });
 
     const galaxyScale = Math.min(1, mapRect.width / requiredSize.width, mapRect.height / requiredSize.height);
     map.style.setProperty("--galaxy-scale", galaxyScale.toFixed(4));
+    map.style.setProperty("--orbit-axis-upper", `${maxSemiMajor * galaxyScale}px`);
 
     map.style.minHeight = `${Math.ceil(requiredSize.height * galaxyScale)}px`;
 
     const measuredMapRect = map.getBoundingClientRect();
-    const focusOffsetX = measuredMapRect.width > 520 ? measuredMapRect.width * 0.12 : 0;
     const focus = {
-      x: measuredMapRect.width / 2 + focusOffsetX,
+      x: measuredMapRect.width / 2,
       y: measuredMapRect.height / 2,
     };
 
@@ -469,12 +482,10 @@ const setupSolarSystem = () => {
 
         const semiMajor = designOrbit.semiMajor * galaxyScale;
         const semiMinor = designOrbit.semiMinor * galaxyScale;
-        const focusOffset = semiMajor * config.eccentricity;
         const tilt = toRadians(config.tilt);
-        const centerOffset = rotatePoint(-focusOffset, 0, tilt);
         const center = {
-          x: focus.x + centerOffset.x,
-          y: focus.y + centerOffset.y,
+          x: focus.x + designOrbit.centerOffset.x * galaxyScale,
+          y: focus.y + designOrbit.centerOffset.y * galaxyScale,
         };
 
         track.style.setProperty("--orbit-width", `${semiMajor * 2}px`);
@@ -494,6 +505,7 @@ const setupSolarSystem = () => {
           semiMajor,
           semiMinor,
           tilt,
+          eccentricity: designOrbit.eccentricity,
           meanAnomaly: config.phase,
           paused: false,
         };
