@@ -203,7 +203,7 @@ const setupSolarSystem = () => {
     {
       key: "micro",
       selector: ".micro-orbit",
-      majorRatio: 0.62,
+      majorRatio: 0.34,
       eccentricity: 0.16,
       tilt: -16,
       period: 17000,
@@ -212,7 +212,7 @@ const setupSolarSystem = () => {
     {
       key: "macro",
       selector: ".macro-orbit",
-      majorRatio: 0.76,
+      majorRatio: 0.4,
       eccentricity: 0.22,
       tilt: 24,
       period: 26000,
@@ -221,7 +221,7 @@ const setupSolarSystem = () => {
     {
       key: "social",
       selector: ".social-orbit",
-      majorRatio: 0.88,
+      majorRatio: 0.96,
       eccentricity: 0.2,
       tilt: -34,
       period: 36000,
