@@ -234,7 +234,7 @@ const setupSolarSystem = () => {
   const basePlanetRadius = 22;
   const baseSunRadius = 55;
   const orbitPadding = 18;
-  const designBoundsSafety = 1.35;
+  const designBoundsSafety = 1.12;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
   let activePlanet = null;

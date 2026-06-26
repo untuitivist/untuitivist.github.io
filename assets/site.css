@@ -141,7 +141,7 @@ a {
   display: grid;
   grid-template-columns: minmax(300px, 0.72fr) minmax(260px, 1.28fr);
   gap: clamp(28px, 4vw, 64px);
-  align-items: start;
+  align-items: center;
   padding: clamp(44px, 7vw, 92px) clamp(18px, 5vw, 72px) clamp(38px, 6vw, 76px);
   background:
     radial-gradient(circle at 72% 52%, rgba(245, 210, 123, 0.24) 0 92px, transparent 320px),
@@ -191,7 +191,7 @@ a {
   background:
     linear-gradient(90deg, rgba(7, 16, 15, 0.7), rgba(7, 16, 15, 0.2) 70%, transparent);
   box-shadow: -28px 0 80px rgba(7, 16, 15, 0.48);
-  align-self: start;
+  align-self: center;
 }
 
 .system-map {
@@ -723,6 +723,16 @@ h1 {
 
   .project-card.feature {
     grid-row: auto;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 721px) {
+  .hero {
+    align-items: start;
+  }
+
+  .hero-copy {
+    align-self: start;
   }
 }
 
