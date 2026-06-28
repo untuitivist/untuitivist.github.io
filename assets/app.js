@@ -31,10 +31,6 @@ const copy = {
     mapAgentScope: "agent-native workflow",
     mapAgent: "Agent",
     mapAgentIntro: "The executable actor that searches, runs, inspects, and iterates the three truth loops.",
-    logoMicroTruth: "Micro Truth",
-    logoMacroTruth: "Macro Truth",
-    logoSocialTruth: "Social Truth",
-    logoAgent: "Agent-native Workflow",
     themeEyebrow: "Core theme",
     themeTitle:
       "Built on agent-native workflow, intelligence is generated from within real systems: finding Micro Truth in physical signals, modeling Macro Truth in embodied environments, and discovering Social Truth in collective decision systems.",
@@ -113,10 +109,6 @@ const copy = {
     mapAgentScope: "Agent \u539f\u751f\u5de5\u4f5c\u6d41",
     mapAgent: "Agent",
     mapAgentIntro: "\u53ef\u6267\u884c\u884c\u52a8\u8005\uff1a\u8d1f\u8d23\u641c\u7d22\u3001\u8fd0\u884c\u3001\u68c0\u67e5\u5e76\u8fed\u4ee3\u4e09\u5c42\u771f\u5b9e\u95ed\u73af\u3002",
-    logoMicroTruth: "\u5fae\u89c2\u771f\u5b9e",
-    logoMacroTruth: "\u5b8f\u89c2\u771f\u5b9e",
-    logoSocialTruth: "\u793e\u4f1a\u771f\u5b9e",
-    logoAgent: "Agent \u539f\u751f\u5de5\u4f5c\u6d41",
     themeEyebrow: "\u6838\u5fc3\u4e3b\u7ebf",
     themeTitle:
       "\u4ee5 Agent \u539f\u751f\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\uff0c\u4ece\u771f\u5b9e\u7cfb\u7edf\u5185\u90e8\u751f\u6210\u667a\u80fd\uff1a\u5728\u7269\u7406\u4fe1\u53f7\u4e2d\u5bfb\u627e\u5fae\u89c2\u771f\u5b9e\uff0c\u5728\u5177\u8eab\u73af\u5883\u4e2d\u5efa\u6a21\u5b8f\u89c2\u771f\u5b9e\uff0c\u5728\u96c6\u4f53\u51b3\u7b56\u7cfb\u7edf\u4e2d\u53d1\u73b0\u793e\u4f1a\u771f\u5b9e\u3002",
