@@ -883,6 +883,11 @@ h1 {
   margin-bottom: 34px;
 }
 
+.theme-section .section-heading {
+  width: 100%;
+  max-width: none;
+}
+
 .section-heading.compact {
   max-width: 640px;
 }
