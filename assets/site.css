@@ -920,7 +920,7 @@ h1 {
 
 .card-topline {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 24px;
@@ -928,12 +928,63 @@ h1 {
 
 .card-topline .truth-icon {
   margin-bottom: 0;
+  flex: 0 0 auto;
+}
+
+.truth-logo {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 820;
+  line-height: 1.1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.truth-logo::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--logo-color, var(--green));
+  box-shadow: 0 0 14px var(--logo-glow, rgba(31, 111, 85, 0.22));
+}
+
+.micro-logo {
+  --logo-color: #3ea982;
+  --logo-glow: rgba(62, 169, 130, 0.36);
+}
+
+.macro-logo {
+  --logo-color: #559edc;
+  --logo-glow: rgba(85, 158, 220, 0.34);
+}
+
+.social-logo {
+  --logo-color: #de7a4f;
+  --logo-glow: rgba(222, 122, 79, 0.34);
+}
+
+.agent-logo {
+  --logo-color: #efb65f;
+  --logo-glow: rgba(239, 182, 95, 0.42);
+  color: var(--paper);
+}
+
+.foundation-topline {
+  min-width: min(100%, 360px);
+  align-self: start;
 }
 
 .theme-grid .foundation-card {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(240px, auto) minmax(0, 1fr);
   gap: 22px;
   align-items: start;
   border-color: rgba(23, 33, 27, 0.28);
