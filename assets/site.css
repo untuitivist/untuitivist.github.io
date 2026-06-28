@@ -937,14 +937,10 @@ h1 {
   margin-left: auto;
   flex: 0 0 48px;
   overflow: visible;
-  color: #f7fff9;
-  filter: drop-shadow(0 0 18px var(--logo-glow, rgba(31, 111, 85, 0.22)));
-}
-
-.truth-logo-svg .logo-orb {
-  fill: var(--logo-fill, rgba(31, 111, 85, 0.9));
-  stroke: var(--logo-stroke, rgba(255, 255, 255, 0.28));
-  stroke-width: 1;
+  color: var(--logo-color, var(--green));
+  filter:
+    drop-shadow(0 0 4px var(--logo-glow-strong, rgba(31, 111, 85, 0.34)))
+    drop-shadow(0 0 14px var(--logo-glow, rgba(31, 111, 85, 0.2)));
 }
 
 .truth-logo-svg .logo-mark {
@@ -956,41 +952,35 @@ h1 {
 }
 
 .truth-logo-svg.micro-logo {
-  --logo-fill: rgba(31, 111, 85, 0.96);
-  --logo-stroke: rgba(116, 215, 176, 0.52);
-  --logo-glow: rgba(62, 169, 130, 0.44);
+  --logo-color: #1f6f55;
+  --logo-glow-strong: rgba(31, 111, 85, 0.42);
+  --logo-glow: rgba(62, 169, 130, 0.3);
 }
 
 .truth-logo-svg.macro-logo {
-  --logo-fill: rgba(44, 93, 135, 0.96);
-  --logo-stroke: rgba(116, 176, 224, 0.52);
-  --logo-glow: rgba(85, 158, 220, 0.42);
+  --logo-color: #2c5d87;
+  --logo-glow-strong: rgba(44, 93, 135, 0.42);
+  --logo-glow: rgba(85, 158, 220, 0.3);
 }
 
 .truth-logo-svg.social-logo {
-  --logo-fill: rgba(184, 93, 51, 0.96);
-  --logo-stroke: rgba(238, 133, 80, 0.54);
-  --logo-glow: rgba(222, 122, 79, 0.42);
+  --logo-color: #b85d33;
+  --logo-glow-strong: rgba(184, 93, 51, 0.42);
+  --logo-glow: rgba(222, 122, 79, 0.3);
 }
 
 .truth-logo-svg.agent-logo {
-  --logo-fill: rgba(218, 151, 58, 0.96);
-  --logo-stroke: rgba(255, 224, 142, 0.6);
-  --logo-glow: rgba(239, 182, 95, 0.5);
-  color: rgba(18, 31, 24, 0.92);
+  --logo-color: #c59a35;
+  --logo-glow-strong: rgba(197, 154, 53, 0.48);
+  --logo-glow: rgba(239, 182, 95, 0.34);
 }
 
 .foundation-topline {
-  min-width: min(100%, 180px);
-  align-self: start;
+  width: 100%;
 }
 
 .theme-grid .foundation-card {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(240px, auto) minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
   border-color: rgba(23, 33, 27, 0.28);
   background: var(--ink);
   color: var(--paper);
@@ -1139,10 +1129,6 @@ h1 {
   .hero,
   .theme-grid,
   .project-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .theme-grid .foundation-card {
     grid-template-columns: 1fr;
   }
 
