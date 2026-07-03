@@ -6,7 +6,11 @@
   const targetSelector = currentScript?.dataset.target || "#untuitivist-profile";
   const height = currentScript?.dataset.height || "520";
   const title = currentScript?.dataset.title || "Profile card for Wiz Lee";
-  const source = currentScript?.dataset.src || `${origin}${defaultPath}`;
+  const savedLanguage = localStorage.getItem("wiz-language");
+  const language = currentScript?.dataset.lang || (savedLanguage === "zh" || savedLanguage === "en" ? savedLanguage : "");
+  const sourceUrl = new URL(currentScript?.dataset.src || `${origin}${defaultPath}`);
+  if (language) sourceUrl.searchParams.set("lang", language);
+  const source = sourceUrl.toString();
   const target = document.querySelector(targetSelector);
 
   if (!target) return;

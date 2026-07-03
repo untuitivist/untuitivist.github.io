@@ -45,6 +45,7 @@ a {
 }
 
 .profile-card {
+  position: relative;
   width: min(100%, 860px);
   display: grid;
   grid-template-columns: minmax(176px, 0.34fr) minmax(0, 1fr);
@@ -55,6 +56,32 @@ a {
   padding: clamp(18px, 3vw, 32px);
   background: var(--card-panel);
   box-shadow: 0 24px 70px rgba(23, 33, 27, 0.16);
+}
+
+.lang-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--card-line);
+  border-radius: 7px;
+  padding: 0 10px;
+  color: var(--card-ink);
+  background: rgba(255, 255, 255, 0.68);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
+  border-color: var(--card-green);
+  color: var(--card-green);
+  outline: none;
 }
 
 .profile-media {
@@ -202,7 +229,8 @@ h1 span {
   }
 
   .focus-list li,
-  .profile-links a {
+  .profile-links a,
+  .lang-toggle {
     background: rgba(255, 255, 255, 0.06);
   }
 }
@@ -214,6 +242,7 @@ h1 span {
 
   .profile-card {
     grid-template-columns: 1fr;
+    padding-top: 62px;
   }
 
   .profile-media {
