@@ -13,6 +13,7 @@ const copy = {
     navTheme: "Theme",
     navWork: "Work",
     navTools: "Tools",
+    navCard: "Card",
     navContact: "Contact",
     heroTitle: "Intelligence from Within",
     brandNote:
@@ -81,6 +82,7 @@ const copy = {
       "Micro Truth, Macro Truth, and Social Truth are the domains. Agent-native Workflow is the foundation that makes their discovery loops executable, inspectable, and repeatable.",
     footerBrand: "WIZ - Wuzhiguan / untuitivist",
     footerText: "Micro Truth, Macro Truth, and Social Truth, grounded by Agent-native Workflow.",
+    footerCard: "Profile Card",
   },
   zh: {
     pageTitle: "WIZ / \u65e0\u76f4\u89c2 / Intelligence from Within",
@@ -91,6 +93,7 @@ const copy = {
     navTheme: "\u4e3b\u7ebf",
     navWork: "\u6210\u679c",
     navTools: "\u5de5\u5177",
+    navCard: "\u540d\u7247",
     navContact: "\u8054\u7cfb",
     heroTitle: "Intelligence from Within",
     brandNote:
@@ -160,6 +163,7 @@ const copy = {
     footerBrand: "WIZ\uff08\u82f1\u6587\u540d\uff09 - \u65e0\u76f4\u89c2 / untuitivist\uff08\u6635\u79f0\uff09",
     footerText:
       "\u5fae\u89c2\u771f\u5b9e | \u5b8f\u89c2\u771f\u5b9e | \u793e\u4f1a\u771f\u5b9e\uff0c\u4ee5 Agent \u539f\u751f\u5de5\u4f5c\u6d41\u4e3a\u5e95\u5ea7\u3002",
+    footerCard: "\u4e2a\u4eba\u540d\u7247",
   },
 };
 
