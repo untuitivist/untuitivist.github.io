@@ -2,10 +2,10 @@
   "name": "intelligence-from-within-homepage",
   "version": "0.1.0",
   "private": true,
-  "description": "A static personal homepage for research systems, embodied AI, and agent-native tools.",
+  "description": "Wiz Lee's bilingual research and engineering portfolio.",
   "type": "module",
   "scripts": {
     "dev": "python -m http.server 4173",
-    "check": "node --check assets/app.js"
+    "check": "node --check assets/app.js && node --check assets/projects.js && node --check assets/cosmos.js && node --check assets/card.js"
   }
 }

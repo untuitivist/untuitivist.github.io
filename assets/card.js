@@ -7,11 +7,11 @@ const copy = {
   en: {
     pageTitle: "Profile Card / Wiz Lee",
     metaDescription:
-      "Public profile card for Wiz Lee / Junyi Li, focused on research systems, embodied AI, and agent-native automation.",
+      "Public profile card for Wiz Lee, focused on research systems, embodied AI, and agent-native automation.",
     shellLabel: "Public profile card",
     profileAlt: "Profile image for Wiz Lee",
     eyebrow: "WIZ / Within Intelligence Zone",
-    name: "Wiz Lee <span>/ Junyi Li</span>",
+    name: "Wiz Lee",
     position: "Chief AI Researcher at Frodobots.",
     summary:
       "I build workflows that expose the internal structure of signals, bodies, environments, markets, and research tools, so they can be inspected, executed, and improved.",
@@ -26,13 +26,13 @@ const copy = {
     scholarLink: "Scholar",
   },
   zh: {
-    pageTitle: "名片 / WIZ",
+    pageTitle: "名片 / Wiz Lee",
     metaDescription:
-      "WIZ / 李俊毅的公开名片，关注研究系统、具身智能、量化工具与 agent-native 自动化。",
+      "Wiz Lee 的公开名片，关注研究系统、具身智能、量化工具与 agent-native 自动化。",
     shellLabel: "公开名片",
-    profileAlt: "WIZ 的个人头像",
+    profileAlt: "Wiz Lee 的个人头像",
     eyebrow: "WIZ / 无直观 / untuitivist",
-    name: "WIZ <span>/ 李俊毅</span>",
+    name: "Wiz Lee",
     position: "Frodobots 首席 AI Researcher。",
     summary:
       "我构建能够暴露真实系统内部结构的工作流：信号、身体、环境、市场与研究工具都应可检查、可执行、可迭代。",
@@ -53,10 +53,7 @@ const getInitialLanguage = () => {
   const queryLanguage = params.get("lang");
   if (queryLanguage === "zh" || queryLanguage === "en") return queryLanguage;
 
-  const savedLanguage = localStorage.getItem("wiz-language");
-  if (savedLanguage === "zh" || savedLanguage === "en") return savedLanguage;
-
-  return navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
+  return "en";
 };
 
 const applyLanguage = (language) => {
@@ -90,8 +87,6 @@ const applyLanguage = (language) => {
     langCurrent.textContent = language === "zh" ? "中" : "EN";
     langNext.textContent = language === "zh" ? "EN" : "中";
   }
-
-  localStorage.setItem("wiz-language", language);
 };
 
 let currentLanguage = getInitialLanguage();
@@ -99,5 +94,8 @@ applyLanguage(currentLanguage);
 
 langToggle?.addEventListener("click", () => {
   currentLanguage = currentLanguage === "zh" ? "en" : "zh";
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", currentLanguage);
+  history.replaceState(null, "", url);
   applyLanguage(currentLanguage);
 });
