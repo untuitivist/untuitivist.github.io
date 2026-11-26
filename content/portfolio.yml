@@ -1,0 +1,471 @@
+profile:
+  brand: "wiz."
+  brandExpansion:
+    en: "Within Intelligence Zone"
+    zh: "Within Intelligence Zone · 智能场域"
+  name:
+    en: "Wiz Lee"
+    zh: "Wiz Lee · 无直观"
+  handle: "untuitivist"
+  tagline:
+    en: "Intelligence, from within."
+    zh: "智能，由内而生。"
+  subtitle:
+    en: "AI research and systems engineering across embodied humanoid control, physical signal physics, and quantitative alpha workflows — unified by an agent-native core."
+    zh: "跨越具身人形控制、物理信号表征与量化因子研究的 AI 科研与工程实践，以 Agent-Native 工作流作为底层闭环。"
+  location:
+    en: "Embodied AI · Physical Signals · Quantitative Systems"
+    zh: "具身智能 · 物理信号 · 量化系统"
+  links:
+    - id: "github"
+      label:
+        en: "GitHub"
+        zh: "GitHub"
+      url: "https://github.com/untuitivist"
+    - id: "scholar"
+      label:
+        en: "Google Scholar"
+        zh: "Google 学术"
+      url: "https://scholar.google.com/citations?hl=zh-CN&user=2fr6v4EAAAAJ"
+    - id: "orcid"
+      label:
+        en: "ORCID"
+        zh: "ORCID"
+      url: "https://orcid.org/0009-0002-6630-371X"
+    - id: "zhihu"
+      label:
+        en: "Zhihu"
+        zh: "知乎"
+      url: "https://www.zhihu.com/people/64-54-70-59/posts"
+    - id: "robomocap"
+      label:
+        en: "RoboMoCap"
+        zh: "RoboMoCap 主页"
+      url: "https://bitrobot-foundation.github.io/robomocap/"
+
+domains:
+  - id: "macro"
+    color: "#5EEAD4"
+    orbitRadius: 4.5
+    orbitTilt: [0.32, 0.0, 0.14]
+    title:
+      en: "Macro Truth"
+      zh: "宏观真实"
+    subtitle:
+      en: "Embodied Systems & Humanoid Motion"
+      zh: "具身系统与人形运动控制"
+    thesis:
+      en: "Grounding intelligence in multi-body dynamics, whole-body motion capture, reinforcement learning, and physical actuators."
+      zh: "将智能锚定在多体动力学、全身动捕、强化学习策略与真实机器人执行器之中。"
+  - id: "micro"
+    color: "#F59E0B"
+    orbitRadius: 3.35
+    orbitTilt: [-0.46, 0.35, -0.22]
+    title:
+      en: "Micro Truth"
+      zh: "微观真实"
+    subtitle:
+      en: "Physical Signals & Urban Perception"
+      zh: "物理信号与视觉感知"
+    thesis:
+      en: "Extracting domain-invariant physical laws from high-frequency vibration spectra and real-world visual hazards."
+      zh: "从高频振动频谱与真实城市视觉场景中提炼跨域不变的物理与结构规律。"
+  - id: "social"
+    color: "#818CF8"
+    orbitRadius: 5.55
+    orbitTilt: [0.18, -0.52, -0.36]
+    title:
+      en: "Social Truth"
+      zh: "社会真实"
+    subtitle:
+      en: "Collective Decisions & Agent-Native Alpha"
+      zh: "集体决策与 Agent-Native 因子工作流"
+    thesis:
+      en: "Turning research loops into composable CLI and MCP primitives that query, simulate, and filter collective market signals."
+      zh: "将量化研究闭环抽象为可组合的 CLI 与 MCP 原语，自动化执行因子探索、回测仿真与筛选。"
+
+works:
+  - id: "robomocap"
+    code: "M-01"
+    domain: "macro"
+    stageType: "robomocap"
+    year: "2026"
+    orbitAngle: 0.35
+    title:
+      en: "RoboMoCap"
+      zh: "RoboMoCap"
+    tagline:
+      en: "200+ hours of egocentric vision paired with 120 Hz whole-body optical motion capture for humanoid learning."
+      zh: "200+ 小时第一视角视觉与 120 Hz 全身光学动捕同步数据集，面向人形机器人学习。"
+    summary:
+      en: "Large-scale multimodal motion capture dataset built across BitRobot, Grounded Superintelligence, and NUS MAGIC Lab. Combines RoboCap (6 hardware-synced cameras + dual IMUs + magnetometer + audio), RoboWrist wrist sensing, and 53-marker 120 Hz NOKOV optical MoCap across 14 participants and 290+ locomotion & loco-manipulation actions — driving 29-DoF Unitree G1 retargeting and egocentric reconstruction benchmarks."
+      zh: "联合 BitRobot、Grounded Superintelligence 与 NUS MAGIC Lab 构建的大规模多模态全身动捕数据集。融合 RoboCap 6 路硬件同步第一视角相机与双 IMU、RoboWrist 腕部传感以及 53 标记点 120 Hz NOKOV 光学动捕，覆盖 14 位采集者、290+ 移动与操作动作，支撑 29-DoF 宇树 G1 运动重定向与第一视角重建基准。"
+    highlights:
+      - label:
+          en: "Scale"
+          zh: "采集规模"
+        value: "200+ hrs · 5TB+"
+      - label:
+          en: "Actions"
+          zh: "动作覆盖"
+        value: "290+ / 14 subjects"
+      - label:
+          en: "Sensors"
+          zh: "同步传感"
+        value: "6 Ego + 2 Wrist + 53-Marker 120Hz"
+      - label:
+          en: "Target"
+          zh: "具身落点"
+        value: "29-DoF Unitree G1"
+    media:
+      poster: "./media/robomocap/hero-poster.jpg"
+      g1Video: "./media/robomocap/g1-D43.mp4"
+      g1Poster: "./media/robomocap/g1-D43.jpg"
+      bodyVideo: "./media/robomocap/body-tracking.mp4"
+      bodyPoster: "./media/robomocap/body-tracking.jpg"
+      robocapImg: "./media/robomocap/robocap-side.png"
+      robowristImg: "./media/robomocap/robowrist.png"
+      ego1: "./media/robomocap/ego-01.jpg"
+      ego2: "./media/robomocap/ego-02.jpg"
+    links:
+      - label:
+          en: "Project Homepage"
+          zh: "项目主页"
+        url: "https://bitrobot-foundation.github.io/robomocap/"
+        primary: true
+      - label:
+          en: "arXiv:2611.10994"
+          zh: "arXiv 论文"
+        url: "https://arxiv.org/abs/2611.10994"
+      - label:
+          en: "Paper PDF"
+          zh: "PDF 全文"
+        url: "https://bitrobot-foundation.github.io/robomocap/RoboMoCap.pdf"
+      - label:
+          en: "Hugging Face Dataset"
+          zh: "Hugging Face 数据集"
+        url: "https://huggingface.co/datasets/BitRobot/robomocap"
+
+  - id: "llm-control-g1"
+    code: "M-02"
+    domain: "macro"
+    stageType: "rerun"
+    year: "2026"
+    orbitAngle: 1.92
+    title:
+      en: "LLM Control G1"
+      zh: "LLM Control G1"
+    tagline:
+      en: "Natural-language reasoning to whole-body Unitree G1 tabletop manipulation, inspectable live via Rerun Web Viewer."
+      zh: "面向宇树 G1 的自然语言高层规划与仿真全身操作控制，内置真·Rerun Web 引擎交互回放。"
+    summary:
+      en: "Bridging LLM task decomposition with low-level humanoid whole-body control in simulation. Language instructions compile into structured manipulation sub-goals (approach, torso stabilization, bimanual reach, grasp, and basket placement) logged directly as Rerun (.rrd) streams for synchronized 3D kinematics, camera, and action-trace inspection in the browser."
+      zh: "打通大语言模型任务分解与底层人形全身控制策略。自然语言指令被编译为可验证的仿真子目标序列（逼近、躯干平衡、伸臂抓取与放置），并原生输出 Rerun (.rrd) 空间日志，支持直接在浏览器中通过官方 Rerun Web Viewer 交互检查三维姿态与控制轨迹。"
+    highlights:
+      - label:
+          en: "Pipeline"
+          zh: "控制链路"
+        value: "LLM Planner → G1 Whole-Body Sim"
+      - label:
+          en: "Inspection"
+          zh: "空间回放"
+        value: "Live @rerun-io/web-viewer (v0.44)"
+      - label:
+          en: "Compatibility"
+          zh: "兼容范围"
+        value: "RRD SDK v0.23 – v0.44"
+      - label:
+          en: "Recording"
+          zh: "仿真视角"
+        value: "MuJoCo Tabletop Manipulation"
+    media:
+      video: "./media/llm-g1-perspective.mp4"
+      poster: "./media/llm-g1-poster.jpg"
+      defaultLocalRrd: "./recordings/llm-g1-sim.rrd"
+      sampleRrdUrl: "https://app.rerun.io/version/0.44.0/examples/structure_from_motion.rrd"
+      secondarySampleRrdUrl: "https://app.rerun.io/version/0.44.0/examples/dna.rrd"
+    links:
+      - label:
+          en: "GitHub Profile"
+          zh: "GitHub 主页"
+        url: "https://github.com/untuitivist"
+
+  - id: "g1-retargeting"
+    code: "M-03"
+    domain: "macro"
+    stageType: "retargeting"
+    year: "2025"
+    orbitAngle: 3.45
+    title:
+      en: "G1 Motion Retargeting"
+      zh: "G1 动作重定向与实机追踪"
+    tagline:
+      en: "From monocular dance video to 3D human recovery, GMR retargeting, mjlab RL tracking, and real Unitree G1 execution."
+      zh: "从单目舞蹈视频到人体动作重建、GMR 运动重定向、mjlab 强化学习全身追踪及宇树 G1 实机部署。"
+    summary:
+      en: "End-to-end human-to-humanoid motion imitation stack. Recovers kinematic human trajectories from RGB dance footage, retargets joint references onto the Unitree G1 kinematic tree via GMR, trains dynamic whole-body tracking policies in mjlab with domain randomization, and deploys agile expressive motion onto physical hardware."
+      zh: "端到端人类到人形机器人动作模仿管线：从普通舞蹈视频恢复三维人体运动轨迹，通过 GMR 重定向至宇树 G1 运动学树，在 mjlab 中结合域随机化训练全身强化学习追踪策略，并完成敏捷表现力动作的实机部署。"
+    highlights:
+      - label:
+          en: "Retargeting"
+          zh: "重定向引擎"
+        value: "RGB → Human Recovery → GMR"
+      - label:
+          en: "RL Engine"
+          zh: "训练框架"
+        value: "mjlab Whole-Body Tracking"
+      - label:
+          en: "Deployment"
+          zh: "实机验证"
+        value: "Sim-to-Real Unitree G1"
+      - label:
+          en: "Reel"
+          zh: "演示时长"
+        value: "00:48 Multi-Stage Pipeline"
+    media:
+      video: "./media/g1-motion.mp4"
+      poster: "./media/g1-motion.webp"
+    links:
+      - label:
+          en: "GitHub Profile"
+          zh: "GitHub 仓库"
+        url: "https://github.com/untuitivist"
+
+  - id: "six-axis-arm"
+    code: "M-04"
+    domain: "macro"
+    stageType: "arm3d"
+    year: "2024"
+    orbitAngle: 5.05
+    title:
+      en: "Six-Axis Robotic Arm"
+      zh: "六轴串联机械臂系统"
+    tagline:
+      en: "Compact 6-DOF serial manipulator: mechanical design, DH forward/inverse kinematics, MATLAB control interface, and physical prototype."
+      zh: "紧凑型六自由度串联机械臂：结构设计、DH 正逆运动学求解、MATLAB 控制界面与物理样机闭环。"
+    summary:
+      en: "Full-stack mechatronic build spanning CAD assembly, Denavit–Hartenberg kinematic modeling, analytical/numerical inverse kinematics, trajectory interpolation, MATLAB graphical control console, and physical hardware motion verification."
+      zh: "从机械结构 CAD 设计、Denavit–Hartenberg 运动学建模、正逆运动学求解与轨迹规划，到 MATLAB 图形化控制界面与物理样机实测的完整机电一体化项目。"
+    highlights:
+      - label:
+          en: "Topology"
+          zh: "机构拓扑"
+        value: "6-DOF Serial Revolute Chain"
+      - label:
+          en: "Kinematics"
+          zh: "运动学建模"
+        value: "DH Forward & Inverse Solver"
+      - label:
+          en: "Control"
+          zh: "控制栈"
+        value: "MATLAB GUI + Hardware Loop"
+      - label:
+          en: "Prototype"
+          zh: "实机测试"
+        value: "00:12 Trajectory Demo"
+    media:
+      video: "./media/robot-arm.mp4"
+      poster: "./media/robot-arm.webp"
+    links:
+      - label:
+          en: "GitHub Profile"
+          zh: "GitHub 主页"
+        url: "https://github.com/untuitivist"
+
+  - id: "pcastnet"
+    code: "P-01"
+    domain: "micro"
+    stageType: "spectral"
+    year: "2025"
+    orbitAngle: 1.05
+    title:
+      en: "PCASTNet"
+      zh: "PCASTNet · 物理约束跨域故障诊断"
+    tagline:
+      en: "Physics-constrained adaptive style transfer (AdaSN) for cross-machine, small-sample intelligent fault diagnosis — IEEE TIM 2025."
+      zh: "面向跨机器、小样本工业故障诊断的物理约束自适应风格迁移网络（AdaSN），发表于 IEEE TIM 2025。"
+    summary:
+      en: "Published in IEEE Transactions on Instrumentation and Measurement (2025). Introduces Adaptive Style Normalization (AdaSN) constrained by physical signal invariants so fault-discriminative harmonic features survive severe cross-machine domain shifts even with minimal target-domain samples."
+      zh: "发表于仪器仪表领域顶刊 IEEE TIM 2025。提出受物理信号不变量约束的自适应风格归一化模块（AdaSN），在目标机器仅有极少标注样本的情况下，有效解耦工况风格偏移并保留故障诊断判别特征。"
+    highlights:
+      - label:
+          en: "Venue"
+          zh: "发表期刊"
+        value: "IEEE TIM 2025"
+      - label:
+          en: "Mechanism"
+          zh: "核心模块"
+        value: "Physics-Constrained AdaSN"
+      - label:
+          en: "Regime"
+          zh: "目标场景"
+        value: "Cross-Machine Small-Sample"
+      - label:
+          en: "Artifact"
+          zh: "开源代码"
+        value: "untuitivist/PCASTNet"
+    media:
+      image: "./media/pcastnet.webp"
+      overview: "./media/pcastnet-overview.webp"
+    links:
+      - label:
+          en: "IEEE TIM Paper"
+          zh: "IEEE TIM 论文"
+        url: "https://doi.org/10.1109/TIM.2025.3643085"
+        primary: true
+      - label:
+          en: "GitHub Code"
+          zh: "开源代码"
+        url: "https://github.com/untuitivist/PCASTNet"
+
+  - id: "manhole-detection"
+    code: "P-02"
+    domain: "micro"
+    stageType: "vision"
+    year: "2025"
+    orbitAngle: 4.18
+    title:
+      en: "Manhole Hazard Detection"
+      zh: "城市井盖隐患大核卷积检测"
+    tagline:
+      en: "YOLOv10 enhanced with RepLKBlock large-kernel convolution (RBC module) for real-world urban road hazard perception."
+      zh: "融合 RepLKBlock 大核卷积（RBC 模块）的 YOLOv10 城市井盖隐患检测架构与定制数据集，发表于《软件》2025。"
+    summary:
+      en: "Curated a domain-specific urban manhole hazard dataset covering broken, displaced, and uncovered covers under varying lighting and occlusion, and redesigned the YOLOv10 backbone with a re-parameterized large-kernel RBC module to expand effective receptive fields without sacrificing real-time inference speed."
+      zh: "构建覆盖破损、移位、缺失等多类别的城市井盖隐患数据集，并在 YOLOv10 主干中引入基于 RepLKBlock 的重参数化大核卷积模块（RBC），在保持实时推理速度的同时显著扩大复杂街景下的有效感受野。"
+    highlights:
+      - label:
+          en: "Venue"
+          zh: "发表期刊"
+        value: "Software (《软件》) 2025"
+      - label:
+          en: "Backbone"
+          zh: "模型结构"
+        value: "YOLOv10 + RepLKBlock (RBC)"
+      - label:
+          en: "Dataset"
+          zh: "数据构建"
+        value: "Multi-State Urban Road Hazards"
+      - label:
+          en: "Focus"
+          zh: "关键增益"
+        value: "Large Receptive Field · Real-Time"
+    media:
+      image: "./media/manhole.webp"
+    links:
+      - label:
+          en: "Journal Article"
+          zh: "期刊全文"
+        url: "https://software.publish.founderss.cn/thesisDetails?columnId=115985918&Fpath=home&index=0&lang=zh"
+        primary: true
+
+  - id: "wqb-cli"
+    code: "S-01"
+    domain: "social"
+    stageType: "terminal"
+    year: "2025"
+    orbitAngle: 2.65
+    title:
+      en: "WorldQuant BRAIN · wqb_cli"
+      zh: "WorldQuant BRAIN · wqb_cli"
+    tagline:
+      en: "Agent-native Python CLI and MCP server uniting WorldQuant BRAIN API access, alpha simulation, and systematic screening."
+      zh: "面向 WorldQuant BRAIN 的 Agent-Native Python CLI 与 MCP 工具链，打通 API 访问、因子仿真与自动化筛选。"
+    summary:
+      en: "Bridges quantitative alpha research and modern LLM agents. Wraps WorldQuant BRAIN authentication, expression validation, batch simulation queuing, and Sharpe/fitness/turnover screening into clean terminal commands and Model Context Protocol (MCP) tools for reproducible autonomous research loops."
+      zh: "将量化因子研究与现代大语言模型 Agent 深度融合。将 WorldQuant BRAIN 认证、表达式校验、批量仿真调度及夏普/适应度/换手率筛选封装为高可读性的 CLI 指令与 MCP 协议工具，让 AI 智能体直接驱动可复现的量化研究闭环。"
+    highlights:
+      - label:
+          en: "Interface"
+          zh: "协议形态"
+        value: "Python CLI + MCP Server"
+      - label:
+          en: "Platform"
+          zh: "目标平台"
+        value: "WorldQuant BRAIN"
+      - label:
+          en: "Loop"
+          zh: "研究闭环"
+        value: "Query → Simulate → Screen"
+      - label:
+          en: "Repository"
+          zh: "开源仓库"
+        value: "untuitivist/wqb_cli"
+    media:
+      image: "./media/wqb-cli.jpg"
+    links:
+      - label:
+          en: "GitHub: wqb_cli"
+          zh: "GitHub 仓库"
+        url: "https://github.com/untuitivist/wqb_cli"
+        primary: true
+
+publications:
+  - id: "pub-robomocap"
+    year: "2026"
+    domain: "macro"
+    venue: "arXiv Preprint · cs.RO"
+    title:
+      en: "RoboMoCap: A Large-Scale Whole-Body Motion Capture Dataset with Egocentric Vision for Robot Learning"
+      zh: "RoboMoCap：面向机器人学习的大规模第一视角视觉与全身光学动捕数据集"
+    authors: "Mayur Deshmukh, Aaron Tung, Wiz Lee, Nikash Bhardwaj, Ademi Adeniji, Vincent Liu, Michael Cho, Jiafei Duan"
+    links:
+      - label: "Project Page"
+        url: "https://bitrobot-foundation.github.io/robomocap/"
+      - label: "arXiv:2611.10994"
+        url: "https://arxiv.org/abs/2611.10994"
+      - label: "Dataset"
+        url: "https://huggingface.co/datasets/BitRobot/robomocap"
+    bibtex: |
+      @misc{deshmukh2026robomocap,
+        title         = {{RoboMoCap}: A Large-Scale Whole-Body Motion Capture Dataset with Egocentric Vision for Robot Learning},
+        author        = {Deshmukh, Mayur and Tung, Aaron and Lee, Wiz and Bhardwaj, Nikash and Adeniji, Ademi and Liu, Vincent and Cho, Michael and Duan, Jiafei},
+        year          = {2026},
+        eprint        = {2611.10994},
+        archivePrefix = {arXiv},
+        primaryClass  = {cs.RO},
+        doi           = {10.48550/arXiv.2611.10994},
+        url           = {https://arxiv.org/abs/2611.10994}
+      }
+
+  - id: "pub-pcastnet"
+    year: "2025"
+    domain: "micro"
+    venue: "IEEE Transactions on Instrumentation and Measurement (IEEE TIM)"
+    title:
+      en: "PCASTNet: Physics-Constrained Adaptive Style Transfer Network for Cross-Machine Small-Sample Fault Diagnosis"
+      zh: "PCASTNet：面向跨机器小样本故障诊断的物理约束自适应风格迁移网络"
+    authors: "Wiz Lee et al."
+    links:
+      - label: "DOI: 10.1109/TIM.2025.3643085"
+        url: "https://doi.org/10.1109/TIM.2025.3643085"
+      - label: "GitHub"
+        url: "https://github.com/untuitivist/PCASTNet"
+    bibtex: |
+      @article{wiz2025pcastnet,
+        title   = {PCASTNet: Physics-Constrained Adaptive Style Transfer Network for Cross-Machine Small-Sample Fault Diagnosis},
+        author  = {Lee, Wiz},
+        journal = {IEEE Transactions on Instrumentation and Measurement},
+        year    = {2025},
+        doi     = {10.1109/TIM.2025.3643085}
+      }
+
+  - id: "pub-manhole"
+    year: "2025"
+    domain: "micro"
+    venue: "Software (《软件》)"
+    title:
+      en: "Urban Manhole Cover Hazard Detection Based on Improved YOLOv10 with Large-Kernel RepLKBlock"
+      zh: "基于改进 YOLOv10 与大核卷积 RepLKBlock 的城市井盖隐患检测方法"
+    authors: "Wiz Lee et al."
+    links:
+      - label: "Journal Article"
+        url: "https://software.publish.founderss.cn/thesisDetails?columnId=115985918&Fpath=home&index=0&lang=zh"
+    bibtex: |
+      @article{wiz2025manhole,
+        title   = {Urban Manhole Cover Hazard Detection Based on Improved YOLOv10 with Large-Kernel RepLKBlock},
+        author  = {Lee, Wiz},
+        journal = {Software},
+        year    = {2025},
+        url     = {https://software.publish.founderss.cn/thesisDetails?columnId=115985918&Fpath=home&index=0&lang=zh}
+      }

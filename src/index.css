@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Chakra Petch', 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  html {
+    background-color: #06080d;
+    color: #eef2f6;
+    font-family: var(--font-sans);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #06080d;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+}
+
+/* Custom minimal precision sliders */
+input[type='range'].wiz-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+
+input[type='range'].wiz-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  background: #d4f0a0;
+  border: 1px solid #06080d;
+  cursor: pointer;
+}
+
+input[type='range'].wiz-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  background: #d4f0a0;
+  border: 1px solid #06080d;
+  cursor: pointer;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06080d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 240, 160, 0.4);
+}
